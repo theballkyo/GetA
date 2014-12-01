@@ -11,6 +11,3 @@ To do
 - [ ] Test
 
 Test in Branch > theballkyo/test
-=======
-Test Project By Theballkyo
->>>>>>> theballkyo/test
