@@ -1,6 +1,7 @@
 GetA
 ====
 
+<<<<<<< HEAD
 Project PSIT 2014
 
 To do
@@ -10,3 +11,6 @@ To do
 - [ ] Test
 
 Test in Branch > theballkyo/test
+=======
+Test Project By Theballkyo
+>>>>>>> theballkyo/test
