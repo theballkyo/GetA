@@ -1,8 +1,8 @@
-from tkinter import *
-import Subject as s
-root = Tk()
+import tkinter as tk
+import Subject as sj
+root = tk.Tk()
 root.geometry("800x600")
-root.title('Project PSIT \"Get A\"')
+root.title('Project PSIT "Get A"')
 
 class Subject():
     def __init__(self, root):
@@ -21,7 +21,7 @@ class Subject():
         self.b.pack()
 
     
-s = Subject(root)
-button_test = Button(root, text='New Subject', command = s.print_box)
+s = sj.Subject(root, 'test')
+button_test = tk.Button(root, text='New Subject', command = s.print_box)
 button_test.pack()
 # button_test.grid(row = 0, column =0)
