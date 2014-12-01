@@ -10,11 +10,16 @@ class Subject():
 
     def print_box(self):
         top = Toplevel()
-        self.e = Entry(top)
+        top.geometry("800x600")
+        top.title("Add new subjects")
+        top.focus()
+        self.e = Text(top)
+
         self.e.pack()
 
         button_ok = Button(top, text='OK', command=self.add_subject)
         button_ok.pack()
+
     def add_subject(self):
         print (self.e.get())
         self.b = Button(self.root, text=self.e.get())
