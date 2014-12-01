@@ -7,12 +7,12 @@ class Subject():
         self.tk = tk
         self.root = root
         # New Frame
-        self.buttonframe = tk.Frame(root)
-        self.buttonframe.pack()
+        self.frame = tk.Frame(root)
+        self.frame.pack()
 
         # Create 2 Button
-        self.b = tk.Button(self.buttonframe, text=name, command=self.print_box)
-        self.rm = tk.Button(self.buttonframe, text="X", command=self.remove)
+        self.b = tk.Button(self.frame, text=name, command=self.print_box)
+        self.rm = tk.Button(self.frame, text="X", command=self.remove)
 
         # Config grid
         self.b.grid(row=0, column=0)
@@ -22,7 +22,7 @@ class Subject():
         self.g = Grade(self)
 
     def remove(self):
-        self.buttonframe.destroy()
+        self.frame.destroy()
 
     def get_text(self):
         return self.b["text"]

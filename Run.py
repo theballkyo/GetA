@@ -2,7 +2,10 @@ import tkinter as tk
 from classes.subject import *
 
 root = tk.Tk()
+
+# Setting windows
 root.geometry("800x600")
+root.resizable(0, 0)
 root.title('Project PSIT "Get A"')
 
 class Run(object):
@@ -18,6 +21,7 @@ class Run(object):
         self.top = tk.Toplevel()
         self.top.title("Add new subject")
         self.top.geometry("250x50")
+        self.top.resizable(0, 0)
         self.top.focus()
 
         frame = tk.Frame(self.top)
@@ -64,4 +68,6 @@ class Run(object):
         for i in range(len(self.SUBJECT_LIST)):
             print (i, self.SUBJECT_LIST[i].get_text())
         print ("------------------------------------")
+
+# Run now
 r = Run()
