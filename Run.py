@@ -17,13 +17,16 @@ class Run(object):
     def new_subject(self):
         top = tk.Toplevel()
         top.title("Add new subject")
-        top.geometry("200x50")
+        top.geometry("250x50")
         top.focus()
-        self.e = tk.Entry(top)
-        self.e.pack()
+
+        frame = tk.Frame(top)
+        frame.pack()
+        self.e = tk.Entry(frame)
+        self.e.grid(row=0, column=0, padx=5, pady=15)
         self.e.focus()
-        button_ok = tk.Button(top, text='OK', command=self.add_subject2)
-        button_ok.pack()
+        button_ok = tk.Button(frame, text='OK', command=self.add_subject2)
+        button_ok.grid(row=0, column=1)
 
     def add_subject(self):
         print (self.e.get())
@@ -33,6 +36,11 @@ class Run(object):
     def add_subject2(self):
         """ New subject """
         name = self.e.get()
+        if name == "":
+            tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
+            self.new_subject()
+            return False
+
         btn = Subject(tk, root, name)
         Run.SUBJECT_LIST.append(btn)
         self.get_subject()
