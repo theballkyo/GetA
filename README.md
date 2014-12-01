@@ -3,9 +3,8 @@ GetA
 
 Project PSIT 2014
 
-====
-
-[x] Design --- Dev
-[ ] Code 
-[ ] Optimizing
-[ ] Test
+To do
+- [X] Design --- Dev
+- [ ] Code 
+- [ ] Optimizing
+- [ ] Test
