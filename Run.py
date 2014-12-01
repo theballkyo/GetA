@@ -7,10 +7,10 @@ root.title('Project PSIT "Get A"')
 
 class Run(object):
     """ Run GetA """
-    SUBJECT_LIST = []
+    
     def __init__(self):
         #self.s = subject.Subject(root, "Test")
-        
+        self.SUBJECT_LIST = []
         new_subject = tk.Button(root, text='New Subject', command = self.new_subject)
         new_subject.pack()
         
@@ -28,13 +28,17 @@ class Run(object):
         button_ok = tk.Button(frame, text='OK', command=self.add_subject2)
         button_ok.grid(row=0, column=1)
 
-    def add_subject(self):
-        print (self.e.get())
-        self.b = tk.Button(root, text=self.e.get())
-        self.b.pack()
+    # def add_subject(self):
+    #     print (self.e.get())
+    #     self.b = tk.Button(root, text=self.e.get())
+    #     self.b.pack()
 
-    def add_subject2(self):
+    def add_subject(self):
         """ New subject """
+        if len(self.SUBJECT_LIST) > 20:
+            tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
+            return False
+
         name = self.e.get()
         if name == "":
             tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
@@ -42,11 +46,11 @@ class Run(object):
             return False
 
         btn = Subject(tk, root, name)
-        Run.SUBJECT_LIST.append(btn)
+        self.SUBJECT_LIST.append(btn)
         self.get_subject()
 
     def get_subject(self):
-        for i in range(len(Run.SUBJECT_LIST)):
-            print (i, Run.SUBJECT_LIST[i].get_text())
+        for i in range(len(self.SUBJECT_LIST)):
+            print (i, self.SUBJECT_LIST[i].get_text())
         print ("------------------------------------")
 r = Run()
