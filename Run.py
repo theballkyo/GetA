@@ -16,9 +16,12 @@ class Run(object):
         
     def new_subject(self):
         top = tk.Toplevel()
+        top.title("Add new subject")
+        top.geometry("200x50")
+        top.focus()
         self.e = tk.Entry(top)
         self.e.pack()
-
+        self.e.focus()
         button_ok = tk.Button(top, text='OK', command=self.add_subject2)
         button_ok.pack()
 
@@ -37,4 +40,5 @@ class Run(object):
     def get_subject(self):
         for i in range(len(Run.SUBJECT_LIST)):
             print (i, Run.SUBJECT_LIST[i].get_text())
+        print ("------------------------------------")
 r = Run()
