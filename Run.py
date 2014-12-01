@@ -15,38 +15,49 @@ class Run(object):
         new_subject.pack()
         
     def new_subject(self):
-        top = tk.Toplevel()
-        top.title("Add new subject")
-        top.geometry("250x50")
-        top.focus()
+        self.top = tk.Toplevel()
+        self.top.title("Add new subject")
+        self.top.geometry("250x50")
+        self.top.focus()
 
-        frame = tk.Frame(top)
+        frame = tk.Frame(self.top)
         frame.pack()
+
         self.e = tk.Entry(frame)
         self.e.grid(row=0, column=0, padx=5, pady=15)
         self.e.focus()
-        button_ok = tk.Button(frame, text='OK', command=self.add_subject2)
+        self.e.bind("<Return>", self.add_subject)
+        button_ok = tk.Button(frame, text='OK', command=self.add_subject)
         button_ok.grid(row=0, column=1)
+
+    def set_e_text(self, text):
+        self.e.delete(0, len(self.e.get()))
+        self.e.insert(0,text)
+        return True
 
     # def add_subject(self):
     #     print (self.e.get())
     #     self.b = tk.Button(root, text=self.e.get())
     #     self.b.pack()
 
-    def add_subject(self):
+    def add_subject(self, event=""):
         """ New subject """
         if len(self.SUBJECT_LIST) > 20:
             tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
+            self.top.destroy()
             return False
 
         name = self.e.get()
         if name == "":
             tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
-            self.new_subject()
+            # self.top.destroy()
+            # self.new_subject()
+            self.e.focus()
             return False
 
         btn = Subject(tk, root, name)
         self.SUBJECT_LIST.append(btn)
+        self.set_e_text("")
         self.get_subject()
 
     def get_subject(self):
