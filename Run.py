@@ -67,8 +67,10 @@ class Run(object):
         # New object subject
         btn = Subject(tk, root, name)
         self.SUBJECT_LIST.append(btn)
+        tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
         self.set_e_text("")
         self.get_subject()
+        self.e.focus()
 
     def get_subject(self):
         """ Get all subjects """
