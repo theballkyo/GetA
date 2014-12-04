@@ -18,6 +18,7 @@ class Run(object):
         new_subject.pack()
         
     def new_subject(self):
+        """ Show new windows add new subject """
         self.top = tk.Toplevel()
         self.top.title("Add new subject")
         self.top.geometry("250x50")
@@ -31,10 +32,13 @@ class Run(object):
         self.e.grid(row=0, column=0, padx=5, pady=15)
         self.e.focus()
         self.e.bind("<Return>", self.add_subject)
+        
         button_ok = tk.Button(frame, text='OK', command=self.add_subject)
         button_ok.grid(row=0, column=1)
+        buttun_clo = tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
 
     def set_e_text(self, text):
+        """ Set Entry Text """
         self.e.delete(0, len(self.e.get()))
         self.e.insert(0,text)
         return True
@@ -43,6 +47,7 @@ class Run(object):
     #     print (self.e.get())
     #     self.b = tk.Button(root, text=self.e.get())
     #     self.b.pack()
+
 
     def add_subject(self, event=""):
         """ New subject """
@@ -59,12 +64,14 @@ class Run(object):
             self.e.focus()
             return False
 
+        # New object subject
         btn = Subject(tk, root, name)
         self.SUBJECT_LIST.append(btn)
         self.set_e_text("")
         self.get_subject()
 
     def get_subject(self):
+        """ Get all subjects """
         for i in range(len(self.SUBJECT_LIST)):
             print (i, self.SUBJECT_LIST[i].get_text())
         print ("------------------------------------")
