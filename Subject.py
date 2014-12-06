@@ -31,7 +31,7 @@ class Hight_school():
         self.g_project = input()
         self.g_hw = input()
         self.g_other = input()
-    def calculate_grade(self):
+    def calculate(self):
         '''
         x.calculate_grade()
 
@@ -44,21 +44,21 @@ class Hight_school():
         '''
         total_score = self.g_exam + self.g_project + self.g_hw + self.g_other
         if total_score >= 80:
-            return self.subject + " : Your grade is 4.00"
-        if total_score >= 75:
-            return self.subject + " : Your grade is 3.50"
-        if total_score >= 70:
-            return self.subject + " : Your grade is 3.00"
-        if total_score >= 65:
-            return self.subject + " : Your grade is 2.50"
-        if total_score >= 60:
-            return self.subject + " : Your grade is 2.00"
-        if total_score >= 55:
-            return self.subject + " : Your grade is 1.50"
-        if total_score >= 50:
-            return self.subject + " : Your grade is 1.00"
-        if total_score < 50:
-            return self.subject + " : Your grade is 0"
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 4.00"
+        elif total_score >= 75:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 3.50"
+        elif total_score >= 70:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 3.00"
+        elif total_score >= 65:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 2.50"
+        elif total_score >= 60:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 2.00"
+        elif total_score >= 55:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 1.50"
+        elif total_score >= 50:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 1.00"
+        elif total_score < 50:
+            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 0"
     def hint(self):
         '''
         x.hint()
