@@ -120,6 +120,7 @@ class Teacher():
         buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
 
     def cal_grade(self):
+        pass
         # self.member = int(input())
         # self.data = []
         # self.a = int(input())
