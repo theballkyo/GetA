@@ -188,12 +188,6 @@ class Student:
             count += 1
             print ("No."+str(count)+" "+i[1])
 
-    def set_e_text(self, text):
-        """ Set Entry Text """
-        self.e.delete(0, len(self.e.get()))
-        self.e.insert(0,text)
-        return True
-
     def add_subject(self, event=""):
         """ New subject """
         self.calculate()
