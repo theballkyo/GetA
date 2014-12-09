@@ -69,11 +69,11 @@ class Student():
         '''
         x.hint()
 
-        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         Find What part of score that you must do  for make your grade better
 
-        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         '''
         cal_hint = max([[((self.b_exam - self.g_exam)*(self.b_exam / 100)), ("Exam")],\
                     [((self.b_project - self.g_project)*(self.b_project / 100)), ("Project")],\
