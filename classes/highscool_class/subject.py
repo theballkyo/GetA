@@ -31,3 +31,6 @@ class Subject():
 
     def set_score(self, score):
         self.score = score
+
+    def set_base(self, base):
+        self.base = base
