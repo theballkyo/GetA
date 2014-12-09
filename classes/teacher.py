@@ -1,5 +1,6 @@
 class Teacher():
 
+<<<<<<< HEAD
     def __init__(self):
         self.member = int(input())
         self.data = []
@@ -44,3 +45,21 @@ class Teacher():
             else:
                 print ("Grade is F")
             
+=======
+    def __init__(self, parent):
+        self.SUBJECT_LIST = []
+        self.mode = parent.mode
+        self.parent = parent
+        self.tk = parent.tk
+        self.root = parent.root
+        
+        self.initUI()
+
+    def initUI(self):
+    	# Highschool
+        if self.mode == 1:
+        	pass
+        # University
+        else:
+        	pass
+>>>>>>> 41d5915dd841a26c28fe7954f1956ee11748d167

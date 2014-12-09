@@ -4,6 +4,7 @@ class Student:
 
     def __init__(self, parent):
         self.SUBJECT_LIST = []
+        self.mode = parent.mode
         self.parent = parent
         self.tk = parent.tk
         self.root = parent.root
@@ -11,11 +12,17 @@ class Student:
         self.initUI()
 
     def initUI(self):
-        new_subject = self.tk.Button(self.root, text='New Subject', command = self.new_subject)
-        new_subject.pack()
+        # Highschool
+        if self.mode == 1:
+            new = self.tk.Button(self.root, text='New Subject',
+                                        command = self.new_subject_ui)
+            new.pack()
+        # University
+        else:
+            pass
         
-    def new_subject(self):
-        """ Show new windows add new subject """
+    def new_subject_ui(self):
+        """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
         self.top.title("Add new subject")
         self.top.geometry("250x50")
