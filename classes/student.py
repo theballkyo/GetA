@@ -25,7 +25,7 @@ class Student:
         """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
         self.top.title("Add new subject")
-        self.top.geometry("300x220")
+        self.top.geometry("350x350")
         self.top.resizable(0, 0)
         self.top.focus()
 
@@ -147,24 +147,24 @@ class Student:
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         '''
-        total_score = self.s_exam_mid.get + self.s_exam_final.get + self.s_project + self.s_hw + self.s_other
+        total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
         total_score = int(total_score)
         if total_score >= 80:
-            return self.e.get + (" Total score = ") + str(total_score)+( " : Your grade is 4.00")
+            print (self.e.get() + (" Total score = ") + str(total_score)+( " : Your grade is 4.00"))
         elif total_score >= 75:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50")
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50"))
         elif total_score >= 70:
-            return self.e.get+ (" Total score = ") + str(total_score)+ (" : Your grade is 3.00")
+            print (self.e.get()+ (" Total score = ") + str(total_score)+ (" : Your grade is 3.00"))
         elif total_score >= 65:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50")
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50"))
         elif total_score >= 60:
-            return self.e,get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00")
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00"))
         elif total_score >= 55:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50")
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50"))
         elif total_score >= 50:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00")
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00"))
         elif total_score < 50:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 0")
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 0"))
 
     def hint(self):
         '''
@@ -176,16 +176,55 @@ class Student:
 
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         '''
-        cal_hint = sorted([[((self.b_exam_mid - self.s_exam_mid)*(self.b_exam_mid / 100)), ("Midterm Exam")],\
-                    [((self.b_project - self.s_project)*(self.b_project / 100)), ("Project")],\
-                    [((self.b_hw - self.s_hw)*(self.b_hw/ 100)), ("Homework")],\
-                    [((self.b_other - self.s_other)*(self.b_other / 100)), ("Exam")],\
-                    [((self.b_other - self.s_other)*(self.b_other / 100)), ("Other")]]\
-                    [((self.b_exam_final - self.s_exam_final)*(self.b_exam_final / 100)), ("Final Exam")])
+        cal_hint = sorted([[((int(self.b_exam_mid.get()) - int(self.s_exam_mid.get()))*(int(self.b_exam_mid.get()) / 100)), ("Midterm Exam")],\
+                    [((int(self.b_project.get()) - int(self.s_project.get()))*(int(self.b_project.get()) / 100)), ("Project")],\
+                    [((int(self.b_hw.get()) - int(self.s_hw.get()))*(int(self.b_hw.get())/ 100)), ("Homework")],\
+                    [((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Exam")],\
+                    [((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Other")],\
+                    [((int(self.b_exam_final.get()) - int(self.s_exam_final.get()))*(int(self.b_exam_final.get()) / 100)), ("Final Exam")]])
         print ("The Sequence of important score is")
         count = 0
         for i in cal_hint:
             count += 1
             print ("No."+str(count)+" "+i[1])
+
+    def set_e_text(self, text):
+        """ Set Entry Text """
+        self.e.delete(0, len(self.e.get()))
+        self.e.insert(0,text)
+        return True
+
+    def add_subject(self, event=""):
+        """ New subject """
+        self.calculate()
+        self.hint()
+        if len(self.SUBJECT_LIST) > 20:
+            self.tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
+            self.top.destroy()
+            return False
+
+        name = self.e.get()
+        if name == "":
+            self.tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
+            # self.top.destroy()
+            # self.new_subject()
+            self.e.focus()
+            return False
+
+        # New object subject
+        btn = Subject(self.tk, self.root, name)
+        self.SUBJECT_LIST.append(btn)
+        self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
+        self.set_e_text("")
+        self.get_subject()
+        self.e.focus()
+
+    def get_subject(self):
+        """ Get all subjects """
+        for i in range(len(self.SUBJECT_LIST)):
+            print (i, self.SUBJECT_LIST[i].get_text())
+        print ("------------------------------------")
+
+    
 
 

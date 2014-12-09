@@ -1,4 +1,4 @@
-from classes.student_class.subject import *
+from classes.subject import *
 
 class Teacher():
 
@@ -8,33 +8,13 @@ class Teacher():
         self.root = parent.root
         self.frame = parent.frame
         self.initUI()
-        # self.member = int(input())
-        # self.data = []
-        # self.a = int(input())
-        # self.bp = int(input())
-        # self.b = int(input())
-        # self.cp = int(input())
-        # self.c = int(input())
-        # self.dp = int(input())
-        # self.d = int(input())
-        # for i in range(self.member):
-        #     self.data.append([int(input()), i+1])
-        # self.data.sort(reverse = True)
 
     def initUI(self):
-        #self.frame = self.tk.Frame(self.top)
-        #self.frame.pack()
-
-        # self.tk.Message(self.frame, text="Subject Name : ").grid(row=0, column=0)
 
         self.btn_std = self.tk.Button(self.frame, text="New Student")
         self.btn_std.grid(row=1, column=0)
         self.btn_sbj = self.tk.Button(self.frame, text="New Subject", command=self.new_subject_ui)
         self.btn_sbj.grid(row=2, column=0)
-
-        # self.e = self.tk.Entry(self.frame, width=10)
-        # self.e.grid(row=0, column=1, padx=5, pady=5)
-        # self.e.focus()
     
     def new_subject_ui(self):
         """ Create UI for add new subject """
@@ -51,7 +31,7 @@ class Teacher():
         self.e = self.tk.Entry(frame, width=10)
         self.e.grid(row=0, column=1, padx=5, pady=5)
         self.e.focus()
-        #self.e.bind("<Return>", self.add_subject)
+        self.e.bind("<Return>", self.add_subject)
         
         self.tk.Message(frame, text="Score").grid(row=1, column=0)
         self.in_score = self.tk.Entry(frame, width=5)
@@ -82,8 +62,10 @@ class Teacher():
             return False
 
         # New object subject
-        btn = Subject(self.tk, self.root, name)
-        self.SUBJECT_LIST.append(btn)
+        sbj = Subject(self, name)
+        sbj.teacher_initUI()
+
+        self.SUBJECT_LIST.append(sbj)
         self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
         self.set_e_text("")
         self.get_subject()
@@ -132,10 +114,24 @@ class Teacher():
         self.e.grid(row=0, column=0, padx=5, pady=15)
         self.e.focus()
         self.e.bind("<Return>", self.add_subject)
-        
+
         button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
         button_ok.grid(row=0, column=1)
         buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
+
+    def cal_grade(self):
+        # self.member = int(input())
+        # self.data = []
+        # self.a = int(input())
+        # self.bp = int(input())
+        # self.b = int(input())
+        # self.cp = int(input())
+        # self.c = int(input())
+        # self.dp = int(input())
+        # self.d = int(input())
+        # for i in range(self.member):
+        #     self.data.append([int(input()), i+1])
+        # self.data.sort(reverse = True)
 
     def get_subject(self):
         """ Get all subjects """
