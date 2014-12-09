@@ -1,6 +1,6 @@
-from classes.highscool_class.subject import *
+from classes.student_class.subject import *
 
-class Highschool:
+class Student:
 
     def __init__(self, parent):
         self.SUBJECT_LIST = []

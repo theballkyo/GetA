@@ -1,7 +1,7 @@
 from classes.gui import *
-from classes.highschool import *
-from classes.university import *
-class Run(Gui, Highschool):
+from classes.student import *
+from classes.teacher import *
+class Run(Gui, Student):
 
     def __init__(self):
         Gui.__init__(self)
@@ -15,9 +15,9 @@ class Run(Gui, Highschool):
         self.frame = tk.Frame(self.root)
         self.frame.pack()
 
-        self.btn_1 = tk.Button(self.frame, text='Highschool', command=self.start_m)
+        self.btn_1 = tk.Button(self.frame, text='Student', command=self.start_m)
         self.btn_1.grid(row=0, column=0)
-        self.btn_2 = tk.Button(self.frame, text='University', command=self.start_u)
+        self.btn_2 = tk.Button(self.frame, text='Teacher', command=self.start_u)
         self.btn_2.grid(row=0, column=1)
 
     def remove_select_level(self):
@@ -27,11 +27,11 @@ class Run(Gui, Highschool):
     def start_m(self):
         """ Start m """
         self.remove_select_level()
-        Highschool(self)
+        Student(self)
         
     def start_u(self):
         """ Start u """
         self.remove_select_level()
-        University.__init__(self)
+        Teacher.__init__(self)
         
 r = Run()

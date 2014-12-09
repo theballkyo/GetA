@@ -1,4 +1,4 @@
-class University:
+class Teacher():
 
     def __init__(self):
         print (type(self.root))
