@@ -28,11 +28,13 @@ class Student():
         self.subject = input()
         self.weight = int(input())
         self.total = int(input())
-        self.b_exam = int(input())
+        self.b_exam_mid = int(input())
+        self.b_exam_final = int(input())
         self.b_project = int(input())
         self.b_hw = int(input())
         self.b_other = int(input())
-        self.g_exam = int(input())
+        self.g_exam_mid = int(input())
+        self.g_exam_final = int(input())
         self.g_project = int(input())
         self.g_hw = int(input())
         self.g_other = int(input())
@@ -47,7 +49,7 @@ class Student():
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         '''
-        total_score = self.g_exam + self.g_project + self.g_hw + self.g_other
+        total_score = self.g_exam_mid + self.g_exam_final + self.g_project + self.g_hw + self.g_other
         total_score = int(total_score)
         if total_score >= 80:
             return self.subject + (" Total score = ") + str(total_score)+( " : Your grade is 4.00")
@@ -75,11 +77,12 @@ class Student():
 
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         '''
-        cal_hint = sorted([[((self.b_exam - self.g_exam)*(self.b_exam / 100)), ("Exam")],\
+        cal_hint = sorted([[((self.b_exam_mid - self.g_exam_mid)*(self.b_exam_mid / 100)), ("Midterm Exam")],\
                     [((self.b_project - self.g_project)*(self.b_project / 100)), ("Project")],\
                     [((self.b_hw - self.g_hw)*(self.b_hw/ 100)), ("Homework")],\
                     [((self.b_other - self.g_other)*(self.b_other / 100)), ("Exam")],\
-                    [((self.b_other - self.g_other)*(self.b_other / 100)), ("Other")]])
+                    [((self.b_other - self.g_other)*(self.b_other / 100)), ("Other")]]\
+                    [((self.b_exam_final - self.g_exam_final)*(self.b_exam_final / 100)), ("Final Exam")])
         print ("The Sequence of important score is")
         count = 0
         for i in cal_hint:
