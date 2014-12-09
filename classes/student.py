@@ -128,21 +128,21 @@ class Student:
         total_score = self.s_exam_mid.get + self.s_exam_final.get + self.s_project + self.s_hw + self.s_other
         total_score = int(total_score)
         if total_score >= 80:
-            return self.e.get + (" Total score = ") + str(total_score)+( " : Your grade is 4.00")
+            print (self.e.get + (" Total score = ") + str(total_score)+( " : Your grade is 4.00"))
         elif total_score >= 75:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50")
+            print (self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50"))
         elif total_score >= 70:
-            return self.e.get+ (" Total score = ") + str(total_score)+ (" : Your grade is 3.00")
+            print (self.e.get+ (" Total score = ") + str(total_score)+ (" : Your grade is 3.00"))
         elif total_score >= 65:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50")
+            print (self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50"))
         elif total_score >= 60:
-            return self.e,get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00")
+            print (self.e,get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00"))
         elif total_score >= 55:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50")
+            print (self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50"))
         elif total_score >= 50:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00")
+            print (self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00"))
         elif total_score < 50:
-            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 0")
+            print (self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 0"))
 
     def hint(self):
         '''
