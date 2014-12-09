@@ -1,4 +1,4 @@
-from classes.highscool_class.score import *
+from classes.student_class.score import *
 
 class Subject():
     def __init__(self, tk, root, name):
