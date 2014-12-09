@@ -83,6 +83,28 @@ class Student:
         """ Set Entry Text """
         self.e.delete(0, len(self.e.get()))
         self.e.insert(0,text)
+        self.weight.delete(0, len(self.weight.get()))
+        self.weight.insert(0,text)
+        self.s_exam_mid.delete(0, len(self.s_exam_mid.get()))
+        self.s_exam_mid.insert(0,text)
+        self.b_exam_mid.delete(0, len(self.b_exam_mid.get()))
+        self.b_exam_mid.insert(0,text)
+        self.s_exam_final.delete(0, len(self.s_exam_final.get()))
+        self.s_exam_final.insert(0,text)
+        self.b_exam_final.delete(0, len(self.b_exam_final.get()))
+        self.b_exam_final.insert(0,text)
+        self.s_project.delete(0, len(self.s_project.get()))
+        self.s_project.insert(0,text)
+        self.b_project.delete(0, len(self.b_project.get()))
+        self.b_project.insert(0,text)
+        self.s_hw.delete(0, len(self.s_hw.get()))
+        self.s_hw.insert(0,text)
+        self.b_hw.delete(0, len(self.b_hw.get()))
+        self.b_hw.insert(0,text)
+        self.s_other.delete(0, len(self.s_other.get()))
+        self.s_other.insert(0,text)
+        self.b_other.delete(0, len(self.b_other.get()))
+        self.b_other.insert(0,text)
         return True
 
     def add_subject(self, event=""):
