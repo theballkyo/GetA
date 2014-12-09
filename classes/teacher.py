@@ -8,33 +8,13 @@ class Teacher():
         self.root = parent.root
         self.frame = parent.frame
         self.initUI()
-        # self.member = int(input())
-        # self.data = []
-        # self.a = int(input())
-        # self.bp = int(input())
-        # self.b = int(input())
-        # self.cp = int(input())
-        # self.c = int(input())
-        # self.dp = int(input())
-        # self.d = int(input())
-        # for i in range(self.member):
-        #     self.data.append([int(input()), i+1])
-        # self.data.sort(reverse = True)
 
     def initUI(self):
-        #self.frame = self.tk.Frame(self.top)
-        #self.frame.pack()
-
-        # self.tk.Message(self.frame, text="Subject Name : ").grid(row=0, column=0)
 
         self.btn_std = self.tk.Button(self.frame, text="New Student")
         self.btn_std.grid(row=1, column=0)
         self.btn_sbj = self.tk.Button(self.frame, text="New Subject", command=self.new_subject_ui)
         self.btn_sbj.grid(row=2, column=0)
-
-        # self.e = self.tk.Entry(self.frame, width=10)
-        # self.e.grid(row=0, column=1, padx=5, pady=5)
-        # self.e.focus()
     
     def new_subject_ui(self):
         """ Create UI for add new subject """
@@ -138,6 +118,20 @@ class Teacher():
         button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
         button_ok.grid(row=0, column=1)
         buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
+
+    def cal_grade(self):
+        # self.member = int(input())
+        # self.data = []
+        # self.a = int(input())
+        # self.bp = int(input())
+        # self.b = int(input())
+        # self.cp = int(input())
+        # self.c = int(input())
+        # self.dp = int(input())
+        # self.d = int(input())
+        # for i in range(self.member):
+        #     self.data.append([int(input()), i+1])
+        # self.data.sort(reverse = True)
 
     def get_subject(self):
         """ Get all subjects """
