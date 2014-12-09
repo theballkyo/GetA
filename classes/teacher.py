@@ -56,10 +56,37 @@ class Teacher():
         self.initUI()
 
     def initUI(self):
-    	# Highschool
+        # Highschool
         if self.mode == 1:
-        	pass
+            new = self.tk.Button(self.root, text='New Subject',
+                                        command = self.new_subject_ui)
+            new.pack()
         # University
         else:
+<<<<<<< HEAD
         	pass
 >>>>>>> 41d5915dd841a26c28fe7954f1956ee11748d167
+=======
+            pass
+
+    def new_subject_ui(self):
+        """ Create UI for add new subject """
+        self.top = self.tk.Toplevel()
+        self.top.title("Add new subject")
+        self.top.geometry("250x50")
+        self.top.resizable(0, 0)
+        self.top.focus()
+
+        frame = self.tk.Frame(self.top)
+        frame.pack()
+
+        self.e = self.tk.Entry(frame)
+        self.e.grid(row=0, column=0, padx=5, pady=15)
+        self.e.focus()
+        self.e.bind("<Return>", self.add_subject)
+        
+        button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
+        button_ok.grid(row=0, column=1)
+        buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
+
+>>>>>>> 633e884448ee4388f426f8bf632c1bb22a92fd25
