@@ -12,8 +12,14 @@ class Student:
         self.initUI()
 
     def initUI(self):
-        new_subject = self.tk.Button(self.root, text='New Subject', command = self.new_subject)
-        new_subject.pack()
+        # Highschool
+        if self.mode == 1:
+            new_subject = self.tk.Button(self.root, text='New Subject',
+                                        command = self.new_subject)
+            new_subject.pack()
+        # University
+        else:
+            pass
         
     def new_subject(self):
         """ Show new windows add new subject """
