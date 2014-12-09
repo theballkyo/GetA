@@ -1,6 +1,7 @@
-class Hight_school():
+class Student():
     def __init__(self):
         '''
+        init
         get a important data for calculate a Grade&Hint
         
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
@@ -20,17 +21,17 @@ class Hight_school():
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         
         '''
-        self.subject = raw_input()
-        self.weight = input()
-        self.total = input()
-        self.b_exam = input()
-        self.b_project = input()
-        self.b_hw = input()
-        self.b_other = input()
-        self.g_exam = input()
-        self.g_project = input()
-        self.g_hw = input()
-        self.g_other = input()
+        self.subject = input()
+        self.weight = int(input())
+        self.total = int(input())
+        self.b_exam = int(input())
+        self.b_project = int(input())
+        self.b_hw = int(input())
+        self.b_other = int(input())
+        self.g_exam = int(input())
+        self.g_project = int(input())
+        self.g_hw = int(input())
+        self.g_other = int(input())
     def calculate(self):
         '''
         x.calculate_grade()
@@ -43,22 +44,23 @@ class Hight_school():
 
         '''
         total_score = self.g_exam + self.g_project + self.g_hw + self.g_other
+        total_score = int(total_score)
         if total_score >= 80:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 4.00"
+            return self.subject + (" Total score = ") + str(total_score)+( " : Your grade is 4.00")
         elif total_score >= 75:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 3.50"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50")
         elif total_score >= 70:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 3.00"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 3.00")
         elif total_score >= 65:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 2.50"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50")
         elif total_score >= 60:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 2.00"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00")
         elif total_score >= 55:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 1.50"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50")
         elif total_score >= 50:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 1.00"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00")
         elif total_score < 50:
-            return self.subject + " Total score = " + str(total_score)+ " : Your grade is 0"
+            return self.subject + (" Total score = ") + str(total_score)+ (" : Your grade is 0")
     def hint(self):
         '''
         x.hint()
@@ -75,5 +77,5 @@ class Hight_school():
                     [((self.b_other - self.g_other)*(self.b_other / 100)), "Exam"],\
                     [((self.b_other - self.g_other)*(self.b_other / 100)), "Other"]])
         
-        return "You must do this part for better score :  " +  cal_hint[1]
+        return ("You must do this part for better score :  ") +  cal_hint[1]
         
