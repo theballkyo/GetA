@@ -15,4 +15,4 @@ for subject in Subject_LIST:
     subject.cal_gpa
 
 gpa = sum(all_subject)*1.0 / sum(lis_weight)
-print gpa
+print (gpa)

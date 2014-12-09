@@ -1,9 +1,10 @@
 from tkinter import Toplevel
 class Score(Toplevel):
 
-	def __init__(self, parent):
-		Toplevel.__init__(self, parent.root)
-		self.geometry("500x200")
-		self.resizable(0, 0)
-		self.parent = parent
-		self.title("Subject name :: " + parent.get_text())
+    def __init__(self, parent):
+        Toplevel.__init__(self, parent.root)
+        self.geometry("500x200")
+        self.resizable(0, 0)
+        self.parent = parent
+        self.title("Subject name :: " + parent.get_text())
+        self.in_score = Entry(parent.root).pack()
