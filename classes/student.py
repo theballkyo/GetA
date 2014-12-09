@@ -14,7 +14,7 @@ class Student:
     def initUI(self):
         # Highschool
         if self.mode == 1:
-            new = self.tk.Button(self.root, text='New Subject',
+            new = self.tk.Button(root.frame_subject, text='New Subject',
                                         command = self.new_subject_ui)
             new.pack()
         # University
@@ -187,6 +187,12 @@ class Student:
         for i in cal_hint:
             count += 1
             print ("No."+str(count)+" "+i[1])
+
+    def set_e_text(self, text):
+        """ Set Entry Text """
+        self.e.delete(0, len(self.e.get()))
+        self.e.insert(0,text)
+        return True
 
     def add_subject(self, event=""):
         """ New subject """
