@@ -7,4 +7,3 @@ class Score(Toplevel):
         self.resizable(0, 0)
         self.parent = parent
         self.title("Subject name :: " + parent.get_text())
-        self.in_score = Entry(parent.root).pack()
