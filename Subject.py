@@ -75,11 +75,15 @@ class Student():
 
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         '''
-        cal_hint = max([[((self.b_exam - self.g_exam)*(self.b_exam / 100)), ("Exam")],\
+        cal_hint = sorted([[((self.b_exam - self.g_exam)*(self.b_exam / 100)), ("Exam")],\
                     [((self.b_project - self.g_project)*(self.b_project / 100)), ("Project")],\
                     [((self.b_hw - self.g_hw)*(self.b_hw/ 100)), ("Homework")],\
                     [((self.b_other - self.g_other)*(self.b_other / 100)), ("Exam")],\
                     [((self.b_other - self.g_other)*(self.b_other / 100)), ("Other")]])
+        print ("The Sequence of important score is")
+        count = 0
+        for i in cal_hint:
+            count += 1
+            print ("No."+str(count)+" "+i[1])
         
-        return ("You must do this part for better score :  ") +  cal_hint[1]
         

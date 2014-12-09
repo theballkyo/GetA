@@ -1,6 +1,5 @@
 class Teacher():
 
-<<<<<<< HEAD
     def __init__(self):
         self.member = int(input())
         self.data = []
@@ -18,7 +17,7 @@ class Teacher():
     def initUI(self):
         pass
     
-    def resault(self):
+    def result(self):
         for i in range(len(self.data)):
             print ("No."+ str(self.data[i][1])+" Score : "+str(self.data[i][0])),
             if self.a != 0:
@@ -44,30 +43,7 @@ class Teacher():
                 self.d -= 1
             else:
                 print ("Grade is F")
-            
-=======
-    def __init__(self, parent):
-        self.SUBJECT_LIST = []
-        self.mode = parent.mode
-        self.parent = parent
-        self.tk = parent.tk
-        self.root = parent.root
-        
-        self.initUI()
 
-    def initUI(self):
-        # Highschool
-        if self.mode == 1:
-            new = self.tk.Button(self.root, text='New Subject',
-                                        command = self.new_subject_ui)
-            new.pack()
-        # University
-        else:
-<<<<<<< HEAD
-        	pass
->>>>>>> 41d5915dd841a26c28fe7954f1956ee11748d167
-=======
-            pass
 
     def new_subject_ui(self):
         """ Create UI for add new subject """
@@ -89,4 +65,3 @@ class Teacher():
         button_ok.grid(row=0, column=1)
         buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
 
->>>>>>> 633e884448ee4388f426f8bf632c1bb22a92fd25
