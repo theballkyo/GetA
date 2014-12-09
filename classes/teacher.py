@@ -1,4 +1,4 @@
-from classes.student_class.subject import *
+from classes.subject import *
 
 class Teacher():
 
@@ -51,7 +51,7 @@ class Teacher():
         self.e = self.tk.Entry(frame, width=10)
         self.e.grid(row=0, column=1, padx=5, pady=5)
         self.e.focus()
-        #self.e.bind("<Return>", self.add_subject)
+        self.e.bind("<Return>", self.add_subject)
         
         self.tk.Message(frame, text="Score").grid(row=1, column=0)
         self.in_score = self.tk.Entry(frame, width=5)
@@ -82,8 +82,10 @@ class Teacher():
             return False
 
         # New object subject
-        btn = Subject(self.tk, self.root, name)
-        self.SUBJECT_LIST.append(btn)
+        sbj = Subject(self, name)
+        sbj.teacher_initUI()
+
+        self.SUBJECT_LIST.append(sbj)
         self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
         self.set_e_text("")
         self.get_subject()
@@ -132,7 +134,7 @@ class Teacher():
         self.e.grid(row=0, column=0, padx=5, pady=15)
         self.e.focus()
         self.e.bind("<Return>", self.add_subject)
-        
+
         button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
         button_ok.grid(row=0, column=1)
         buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
