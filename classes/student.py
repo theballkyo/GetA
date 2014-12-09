@@ -25,21 +25,29 @@ class Student:
         """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
         self.top.title("Add new subject")
-        self.top.geometry("250x50")
+        self.top.geometry("200x150")
         self.top.resizable(0, 0)
         self.top.focus()
 
         frame = self.tk.Frame(self.top)
         frame.pack()
 
-        self.e = self.tk.Entry(frame)
-        self.e.grid(row=0, column=0, padx=5, pady=15)
+        self.tk.Message(frame, text="Subject Name : ").grid(row=0, column=0)
+        self.e = self.tk.Entry(frame, width=10)
+        self.e.grid(row=0, column=1, padx=5, pady=5)
         self.e.focus()
-        self.e.bind("<Return>", self.add_subject)
+        #self.e.bind("<Return>", self.add_subject)
+        
+        self.tk.Message(frame, text="Score").grid(row=1, column=0)
+        self.in_score = self.tk.Entry(frame, width=5)
+        self.in_score.grid(row=1, column=1, padx=5, pady=5)
+        self.base
+
+
         
         button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
-        button_ok.grid(row=0, column=1)
-        buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
+        #button_ok.grid(row=0, column=1)
+        #buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
 
     def set_e_text(self, text):
         """ Set Entry Text """
