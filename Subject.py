@@ -1,4 +1,8 @@
 class Student():
+    '''
+    Class Student()
+    For calculate everything for Funtion Student
+    '''
     def __init__(self):
         '''
         init
