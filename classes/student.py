@@ -114,3 +114,56 @@ class Student:
             print (i, self.SUBJECT_LIST[i].get_text())
         print ("------------------------------------")
 
+    def calculate(self):
+        '''
+        x.calculate_grade()
+
+        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+
+        Calculate what grade do you get
+
+        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+
+        '''
+        total_score = self.s_exam_mid.get + self.s_exam_final.get + self.s_project + self.s_hw + self.s_other
+        total_score = int(total_score)
+        if total_score >= 80:
+            return self.e.get + (" Total score = ") + str(total_score)+( " : Your grade is 4.00")
+        elif total_score >= 75:
+            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50")
+        elif total_score >= 70:
+            return self.e.get+ (" Total score = ") + str(total_score)+ (" : Your grade is 3.00")
+        elif total_score >= 65:
+            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50")
+        elif total_score >= 60:
+            return self.e,get + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00")
+        elif total_score >= 55:
+            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50")
+        elif total_score >= 50:
+            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00")
+        elif total_score < 50:
+            return self.e.get + (" Total score = ") + str(total_score)+ (" : Your grade is 0")
+
+    def hint(self):
+        '''
+        x.hint()
+
+        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+
+        Find What part of score that you must do  for make your grade better
+
+        -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+        '''
+        cal_hint = sorted([[((self.b_exam_mid - self.s_exam_mid)*(self.b_exam_mid / 100)), ("Midterm Exam")],\
+                    [((self.b_project - self.s_project)*(self.b_project / 100)), ("Project")],\
+                    [((self.b_hw - self.s_hw)*(self.b_hw/ 100)), ("Homework")],\
+                    [((self.b_other - self.s_other)*(self.b_other / 100)), ("Exam")],\
+                    [((self.b_other - self.s_other)*(self.b_other / 100)), ("Other")]]\
+                    [((self.b_exam_final - self.s_exam_final)*(self.b_exam_final / 100)), ("Final Exam")])
+        print ("The Sequence of important score is")
+        count = 0
+        for i in cal_hint:
+            count += 1
+            print ("No."+str(count)+" "+i[1])
+
+
