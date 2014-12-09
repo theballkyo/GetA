@@ -4,6 +4,7 @@ class Student:
 
     def __init__(self, parent):
         self.SUBJECT_LIST = []
+        self.mode = parent.mode
         self.parent = parent
         self.tk = parent.tk
         self.root = parent.root
