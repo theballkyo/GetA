@@ -1,10 +1,6 @@
 class Teacher():
 
-<<<<<<< HEAD
-    def __init__(self):
-=======
     def __init__(self, parent):
->>>>>>> 6f245a99b2f659e515c37c3d7b927ea1b64204c8
         self.member = int(input())
         self.data = []
         self.a = int(input())
