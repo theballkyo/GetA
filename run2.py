@@ -10,12 +10,24 @@ class Run:
         # Mode 1 = Highschool, Mode 2 = University
         self.mode = 0
         
+        #self.studentUI()
         self.initUI()
         
     def initUI(self):
         self.root.geometry("600x500")
         self.root.resizable(0, 0)
         self.root.title('Project PSIT "Get A"')
+        
+        self.btn_std = tk.Button(self.root, text="Student", command=self.studentUI)
+        self.btn_std.place(x=200, y=200)
+
+        self.btn_tch = tk.Button(self.root, text="Teacher")
+        self.btn_tch.place(x=400, y=200)
+        
+    def studentUI(self):
+        self.root.geometry("600x500")
+        self.root.resizable(0, 0)
+        self.root.title(' "Get A" : Student Mode')
         
         self.frame_subject = tk.Frame(self.root, bg="Blue")
         self.frame_subject.place(width=300, height=250, x=0, y=0)
@@ -26,10 +38,10 @@ class Run:
         self.frame_result = tk.Frame(self.root, width=800, height=300, bg="Yellow")
         self.frame_result.place(width=600, height=250, x=0, y=250)
 
-        self.btn_1 = tk.Button(self.frame_subject, text='Highschool', command=self.set_highschool)
-        self.btn_1.grid(row=0, column=0)
-        self.btn_2 = tk.Button(self.frame_subject, text='University', command=self.set_university)
-        self.btn_2.grid(row=0, column=1)
+        #self.btn_1 = tk.Button(self.frame_subject, text='Highschool', command=self.set_highschool)
+        #self.btn_1.grid(row=0, column=0)
+        #self.btn_2 = tk.Button(self.frame_subject, text='University', command=self.set_university)
+        #self.btn_2.grid(row=0, column=1)
 
     def remove_select_level(self):
         self.btn_1.destroy()
