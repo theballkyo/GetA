@@ -14,7 +14,7 @@ class Student:
     def initUI(self):
         # Highschool
         if self.mode == 1:
-            new = self.tk.Button(root.frame_subject, text='New Subject',
+            new = self.tk.Button(self.root, text='New Subject',
                                         command = self.new_subject_ui)
             new.pack()
         # University
