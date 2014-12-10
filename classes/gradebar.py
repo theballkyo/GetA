@@ -5,7 +5,9 @@ class Progressbar():
     obj_progress = False
 
     def __init__(self, root, max_width, max_height, score):
-        self.canvas = Canvas(root, width=max_width-2, height=max_height)
+        bar = LabelFrame(root, text="Grade Bar", padx=5, pady=5)
+        bar.pack(padx=10, pady=10)
+        self.canvas = Canvas(bar, width=max_width-2, height=max_height)
         self.canvas.pack()
         self.color = self.get_color(score)
         self.canvas.create_rectangle(2, 2, max_width, max_height, fill=self.color, outline="black")
