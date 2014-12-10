@@ -62,6 +62,13 @@ class StudentUI:
         self.edit_btn = self.tk.Button(self.edit_score, text="Edit", command=self.s_edit)
         self.edit_btn.grid(row=5, column=1)
 
+        self.grade_frame = self.tk.Frame(self.frame_result, width=150, height=150, relief='raised')
+        self.tk.Message(self.grade_frame, text=' Your Grade is : ').place(x=10, y=10, width=100, height=50)
+        self.grade_frame.place(x=110, y=50)
+
+        self.hint_frame = self.tk.LabelFrame(self.frame_result, text='Hint!!!', width=270, height=215)
+        self.hint_frame.place(x=310, y=15)
+        
     def s_edit(self):
         sbj.s_exam_mid = self.e_s_exam_mid.get()
         sbj.s_final = self.e_s_exam_final.get()
