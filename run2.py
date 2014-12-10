@@ -1,20 +1,15 @@
 from classes.studentUI import *
 from classes.teacherUI import *
 
-import tkinter as tk 
+import tkinter as tk
+from tkinter import ttk
 class Run:
 
     def __init__(self):
         self.root = tk.Tk()
         self.tk = tk
         # Mode 1 = Highschool, Mode 2 = University
-        self.mode = 0
-        
-        #self.studentUI()
-        self.initUI()
-        
-    def initUI(self):
-        self.root.geometry("600x500")
+        self.mode = self.root.geometry("600x500")
         self.root.resizable(0, 0)
         self.root.title('Project PSIT "Get A"')
         

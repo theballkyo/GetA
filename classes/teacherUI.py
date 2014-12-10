@@ -1,6 +1,7 @@
 from classes.subject import *
 from classes.SubjectUI import *
 from classes.student import *
+from tkinter import ttk
 class TeacherUI(SubjectUI):
 
     def __init__(self, parent):
@@ -10,26 +11,57 @@ class TeacherUI(SubjectUI):
         self.tk = parent.tk
         self.root = parent.root
         self.initUI()
+        self.data_list = []
 
     def initUI(self):
         self.root.geometry("600x500")
         self.root.resizable(0, 0)
-        self.root.title(' "Get A" : Student Mode')
+        self.root.title(' "Get A" : Teacher mode')
         
-        self.frame_subject = self.tk.Frame(self.root, bg="Blue")
-        self.frame_subject.place(width=300, height=250, x=0, y=0)
+        self.frame_subject = self.tk.Frame(self.root, bg="White")
+        self.frame_subject.place(width=600, height=500, x=0, y=0)
 
-        self.frame_edit = self.tk.Frame(self.root, width=400, height=300, bg="Red")
-        self.frame_edit.place(width=300, height=250, x=300, y=0)
+        self.btn_std = self.tk.Button(self.frame_subject, text="New Student", command=self.add_stu)
+        self.btn_std.place(x=260, y=20)
+        self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
+        self.listbox.place(x=230, y=50)
+        self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.result)
+        self.btn_cal.place(x=270, y=400)
 
-        self.frame_result = self.tk.Frame(self.root, width=800, height=300, bg="Yellow")
-        self.frame_result.place(width=600, height=250, x=0, y=250)
+    def add_stu(self):
+        self.new = self.tk.Toplevel()
+        self.new.title("Data new student")
+        self.new.geometry("450x150")
+        self.new.resizable(0, 0)
+        self.new.focus()
 
-        self.btn_std = self.tk.Button(self.frame_subject, text="New Student", command=self.new_std_ui)
-        self.btn_std.grid(row=1, column=0, padx=5, pady=5)
-        self.btn_sbj = self.tk.Button(self.frame_subject, text="New Subject", command=self.new_subject_ui)
-        self.btn_sbj.grid(row=2, column=0, padx=5, pady=5)
+        frame = self.tk.Frame(self.new)
+        frame.pack()
 
+        self.tk.Message(frame, text="Name : ", width=55).grid(row=0, column=0)
+        self.n = self.tk.Entry(frame, width=10)
+        self.n.grid(row=0, column=1, padx=5, pady=5)
+        self.n.focus()
+        self.n.bind("<Return>", self.add_stu)
+
+        self.tk.Message(frame, text="Surname :", width=70).grid(row=0, column=2)
+        self.s = self.tk.Entry(frame, width=10)
+        self.s.grid(row=0, column=3, padx=5, pady=5)
+
+        
+        self.tk.Message(frame, text="Score :", width=500).grid(row=2, column=0)
+        self.score = self.tk.Entry(frame, width=5)
+        self.score.grid(row=2, column=1)
+      
+
+        button_ok = self.tk.Button(frame, text='OK', command=self.add_list)
+        button_ok.grid(row=7, column=1)
+        buttun_can = self.tk.Button(frame, text='Cancle', command='').grid(row=7, column=2)
+
+    def add_list(self):
+        self.data_list.append([self.n.get()+" "+self.s.get(), self.score.get()])
+        
+    
     def new_subject_ui(self):
         """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
