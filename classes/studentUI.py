@@ -8,7 +8,7 @@ class StudentUI:
         self.parent = parent
         self.tk = parent.tk
         self.root = parent.root
-
+        self.STD_LIST = {0: "test"}
         self.initUI()
 
     def initUI(self):
@@ -192,8 +192,8 @@ class StudentUI:
             self.top.destroy()
             return False
 
-        name = self.e.get()
-        if name == "":
+        self.name = self.e.get()
+        if self.name == "":
             self.tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
             # self.top.destroy()
             # self.new_subject()
@@ -201,12 +201,20 @@ class StudentUI:
             return False
 
         # Add subject to listbox
-        self.listbox.insert("end", name)
+        self.listbox.insert("end", self.name)
         
         # New object subject
-        btn = Subject(self, name)
-        self.SUBJECT_LIST.append(btn)
-        self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
+        sbj = Subject(self)
+
+        sbj.m_exam_mid = self.b_exam_mid.get()
+        sbj.m_final = self.b_exam_final.get()
+        sbj.m_project = self.b_project.get()
+        sbj.m_hw = self.b_hw.get()
+        sbj.m_other = self.b_other.get()
+        sbj.weight = self.weight.get()
+
+        self.SUBJECT_LIST.append(sbj)
+        self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
         self.set_e_text("")
         self.get_subject()
         self.e.focus()

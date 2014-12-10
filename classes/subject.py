@@ -16,6 +16,7 @@ class Subject():
         self.m_project = 0
         self.m_hw = 0
         self.m_other = 0
+        self.weight = 0
         self.score = 0
 
     def get_text(self):
