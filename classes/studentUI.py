@@ -1,5 +1,6 @@
 from classes.subject import *
 from classes.gradebar import *
+from classes.gradebar import *
 
 class StudentUI:
 
@@ -11,7 +12,8 @@ class StudentUI:
         self.root = parent.root
         self.STD_LIST = {0: "test"}
         self.initUI()
-
+    
+        
     def initUI(self):
         self.root.geometry("600x500")
         self.root.resizable(0, 0)
@@ -26,6 +28,9 @@ class StudentUI:
         self.frame_result = self.tk.Frame(self.root, width=800, height=300, bg="Yellow")
         self.frame_result.place(width=600, height=250, x=0, y=250)
 
+        self.progress = Progressbar(self.frame_result, 20, 400, 80)
+        self.progress.update(80)
+        
         self.listbox = self.tk.Listbox(self.frame_subject, width=28, height = 11)
         self.listbox.place(x=30, y=40)
         new = self.tk.Button(self.frame_subject, text='New Subject',
@@ -189,6 +194,8 @@ class StudentUI:
             print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is D"))
         elif total_score < 50:
             print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is F"))
+
+        self.progress.update(total_score)
 
     def hint(self):
         '''
