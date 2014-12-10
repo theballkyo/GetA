@@ -25,8 +25,21 @@ class TeacherUI(SubjectUI):
         self.btn_std.place(x=260, y=20)
         self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
         self.listbox.place(x=230, y=50)
-        self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.result)
+        self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.generate)
         self.btn_cal.place(x=270, y=400)
+
+    def generate(self):
+        self.gen = self.tk.Toplevel()
+        self.gen.title("Result")
+        self.gen.geometry("600x500")
+        self.gen.resizable(0, 0)
+        self.data_list.sort(reverse = True)
+        num = 1
+        for i in self.data_list:
+            print ("No."+str(num) +" Name: "+str(i[1])+" Score: "+str(i[0]))
+            num += 1
+
+        
 
     def add_stu(self):
         self.new = self.tk.Toplevel()
@@ -59,8 +72,7 @@ class TeacherUI(SubjectUI):
         buttun_can = self.tk.Button(frame, text='Cancle', command='').grid(row=7, column=2)
 
     def add_list(self):
-        self.data_list.append([self.n.get()+" "+self.s.get(), self.score.get()])
-        
+        self.data_list.append([int(self.score.get()), self.n.get()+" "+self.s.get()])        
     
     def new_subject_ui(self):
         """ Create UI for add new subject """
