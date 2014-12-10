@@ -1,4 +1,5 @@
 from classes.subject import *
+from classes.gradebar import *
 
 class StudentUI:
 
@@ -38,25 +39,31 @@ class StudentUI:
         self.edit_score.place(x=30, y=30)
 
         self.tk.Message(self.edit_score, text="Midterm :", width=80).grid(row=0, column=0)
-        self.s_exam_mid = self.tk.Entry(self.edit_score, width=5)
-        self.s_exam_mid.grid(row=0, column=1)
+        self.e_s_exam_mid = self.tk.Entry(self.edit_score, width=5)
+        self.e_s_exam_mid.grid(row=0, column=1)
         self.tk.Message(self.edit_score, text="Final :", width=50).grid(row=1, column=0)
-        self.s_exam_final = self.tk.Entry(self.edit_score, width=5)
-        self.s_exam_final.grid(row=1, column=1)
+        self.e_s_exam_final = self.tk.Entry(self.edit_score, width=5)
+        self.e_s_exam_final.grid(row=1, column=1)
         self.tk.Message(self.edit_score, text="Project :", width=50).grid(row=2, column=0)
-        self.s_project = self.tk.Entry(self.edit_score, width=5)
-        self.s_project.grid(row=2, column=1)
+        self.e_s_project = self.tk.Entry(self.edit_score, width=5)
+        self.e_s_project.grid(row=2, column=1)
         self.tk.Message(self.edit_score, text="Homework :", width=80).grid(row=3, column=0)
-        self.s_hw = self.tk.Entry(self.edit_score, width=5)
-        self.s_hw.grid(row=3, column=1)
+        self.e_s_hw = self.tk.Entry(self.edit_score, width=5)
+        self.e_s_hw.grid(row=3, column=1)
         self.tk.Message(self.edit_score, text="Other :", width=50).grid(row=4, column=0)
-        self.s_other = self.tk.Entry(self.edit_score, width=5)
-        self.s_other.grid(row=4, column=1)
+        self.e_s_other = self.tk.Entry(self.edit_score, width=5)
+        self.e_s_other.grid(row=4, column=1)
 
-        self.edit_btn = self.tk.Button(self.edit_score, text="Edit",)
+        self.edit_btn = self.tk.Button(self.edit_score, text="Edit", command=self.s_edit)
         self.edit_btn.grid(row=5, column=1)
 
-        
+    def s_edit(self):
+        sbj.s_exam_mid = self.e_s_exam_mid.get()
+        sbj.s_final = self.e_s_exam_final.get()
+        sbj.s_project = self.e_s_project.get()
+        sbj.s_hw = self.e_s_hw.get()
+        sbj.s_other = self.e_s_other.get()
+
     def new_subject_ui(self):
         """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
@@ -149,6 +156,10 @@ class StudentUI:
             print (i, self.SUBJECT_LIST[i].get_text())
         print ("------------------------------------")
 
+    def print_bar(self):
+        total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
+        total_score = int(total_score)
+
     def calculate(self):
         '''
         x.calculate_grade()
@@ -228,13 +239,20 @@ class StudentUI:
         
         # New object subject
         sbj = Subject(self)
-
+        
+        sbj.s_exam_mid = self.s_exam_mid.get()
+        sbj.s_final = self.s_exam_final.get()
+        sbj.s_project = self.s_project.get()
+        sbj.s_hw = self.s_hw.get()
+        sbj.s_other = self.s_other.get()
+        
         sbj.m_exam_mid = self.b_exam_mid.get()
         sbj.m_final = self.b_exam_final.get()
         sbj.m_project = self.b_project.get()
         sbj.m_hw = self.b_hw.get()
         sbj.m_other = self.b_other.get()
         sbj.weight = self.weight.get()
+        
 
         self.SUBJECT_LIST.append(sbj)
         self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
