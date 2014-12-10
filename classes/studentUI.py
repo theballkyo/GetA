@@ -28,8 +28,8 @@ class StudentUI:
         self.frame_result = self.tk.Frame(self.root, width=800, height=300, bg="Yellow")
         self.frame_result.place(width=600, height=250, x=0, y=250)
 
-        self.progress = Progressbar(self.frame_result, 20, 400, 80)
-        self.progress.update(80)
+        self.progress = Progressbar(self.frame_result, 20, 200, 100)
+        self.progress.update(0)
         
         self.listbox = self.tk.Listbox(self.frame_subject, width=28, height = 11)
         self.listbox.place(x=30, y=40)
@@ -160,10 +160,6 @@ class StudentUI:
         for i in range(len(self.SUBJECT_LIST)):
             print (i, self.SUBJECT_LIST[i].get_text())
         print ("------------------------------------")
-
-    def print_bar(self):
-        total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
-        total_score = int(total_score)
 
     def calculate(self):
         '''
