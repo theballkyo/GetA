@@ -25,14 +25,37 @@ class StudentUI:
         self.frame_result = self.tk.Frame(self.root, width=800, height=300, bg="Yellow")
         self.frame_result.place(width=600, height=250, x=0, y=250)
 
-        self.listbox = self.tk.Listbox(self.frame_subject)
-        self.listbox.grid(row=1, column=0)
+        self.listbox = self.tk.Listbox(self.frame_subject, width=28, height = 11)
+        self.listbox.place(x=30, y=40)
         new = self.tk.Button(self.frame_subject, text='New Subject',
                             command = self.new_subject_ui)
         new.grid(row=0, column=0)
         b = self.tk.Button(self.frame_subject, text="Delete",
-                   command=lambda listbox=self.listbox: listbox.delete("anchor"))
-        b.grid(row=2, column=0)
+                   command=lambda listbox=self.listbox: listbox.delete("anchor"), )
+        b.place(x=220, y=200)
+        
+        self.edit_score = self.tk.LabelFrame(self.frame_edit, text="Edit Score", padx=5, pady=5)
+        self.edit_score.place(x=30, y=30)
+
+        self.tk.Message(self.edit_score, text="Midterm :", width=80).grid(row=0, column=0)
+        self.s_exam_mid = self.tk.Entry(self.edit_score, width=5)
+        self.s_exam_mid.grid(row=0, column=1)
+        self.tk.Message(self.edit_score, text="Final :", width=50).grid(row=1, column=0)
+        self.s_exam_final = self.tk.Entry(self.edit_score, width=5)
+        self.s_exam_final.grid(row=1, column=1)
+        self.tk.Message(self.edit_score, text="Project :", width=50).grid(row=2, column=0)
+        self.s_project = self.tk.Entry(self.edit_score, width=5)
+        self.s_project.grid(row=2, column=1)
+        self.tk.Message(self.edit_score, text="Homework :", width=80).grid(row=3, column=0)
+        self.s_hw = self.tk.Entry(self.edit_score, width=5)
+        self.s_hw.grid(row=3, column=1)
+        self.tk.Message(self.edit_score, text="Other :", width=50).grid(row=4, column=0)
+        self.s_other = self.tk.Entry(self.edit_score, width=5)
+        self.s_other.grid(row=4, column=1)
+
+        self.edit_btn = self.tk.Button(self.edit_score, text="Edit",)
+        self.edit_btn.grid(row=5, column=1)
+
         
     def new_subject_ui(self):
         """ Create UI for add new subject """
