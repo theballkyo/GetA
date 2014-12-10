@@ -1,21 +1,15 @@
 from classes.student_class.score import *
 
 class Subject():
-    def __init__(self, tk, root, name, listbox):
+    def __init__(self, tk, root, name):
     
         self.score = 0
         
         self.name = name
         self.tk = tk
         self.root = root
-        self.listbox = listbox
-        # New Frame
-        self.frame = tk.Frame(self.root)
-        self.frame.pack()
 
         listbox.insert("end", name)
-        b = self.tk.Button(self.root, text="Delete",
-                   command=lambda listbox=listbox: listbox.delete("anchor")).pack()
         # Create 2 Button   
         #self.b = tk.Button(self.frame, text=name, command=self.print_box)
         #self.rm = tk.Button(self.frame, text="X", command=self.remove)

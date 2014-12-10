@@ -1,4 +1,4 @@
-from classes.student_class.subject import *
+from classes.subject import *
 
 class Student:
 
@@ -8,27 +8,28 @@ class Student:
         self.parent = parent
         self.tk = parent.tk
         self.root = parent.root
-        
-        self.listbox = self.tk.Listbox(self.root)
-        self.listbox.pack()
+
+        self.frame_subject = parent.frame_subject
+        self.frame_edit = parent.frame_edit
+        self.frame_result = parent.frame_result
         
         self.initUI()
 
     def initUI(self):
-        # Highschool
-        if self.mode == 1:
-            new = self.tk.Button(self.root, text='New Subject',
-                                        command = self.new_subject_ui)
-            new.pack()
-        # University
-        else:
-            pass
+        self.listbox = self.tk.Listbox(self.frame_subject)
+        self.listbox.grid(row=1, column=0)
+        new = self.tk.Button(self.frame_subject, text='New Subject',
+                            command = self.new_subject_ui)
+        new.grid(row=0, column=0)
+        b = self.tk.Button(self.frame_subject, text="Delete",
+                   command=lambda listbox=self.listbox: listbox.delete("anchor"))
+        b.grid(row=2, column=0)
         
     def new_subject_ui(self):
         """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
         self.top.title("Add new subject")
-        self.top.geometry("350x350")
+        self.top.geometry("300x260")
         self.top.resizable(0, 0)
         self.top.focus()
 
@@ -185,20 +186,14 @@ class Student:
             self.e.focus()
             return False
 
+        # Add subject to listbox
+        self.listbox.insert("end", name)
+        
         # New object subject
-        btn = Subject(self.tk, self.root, name, self.listbox)
+        btn = Subject(self, name)
         self.SUBJECT_LIST.append(btn)
         self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
         self.set_e_text("")
         self.get_subject()
         self.e.focus()
-
-    def get_subject(self):
-        """ Get all subjects """
-        for i in range(len(self.SUBJECT_LIST)):
-            print (i, self.SUBJECT_LIST[i].get_text())
-        print ("------------------------------------")
-
-    
-
 
