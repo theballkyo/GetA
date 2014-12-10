@@ -131,21 +131,21 @@ class Student:
         total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
         total_score = int(total_score)
         if total_score >= 80:
-            print (self.e.get() + (" Total score = ") + str(total_score)+( " : Your grade is 4.00"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+( " : Your grade is A"))
         elif total_score >= 75:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 3.50"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is B+"))
         elif total_score >= 70:
-            print (self.e.get()+ (" Total score = ") + str(total_score)+ (" : Your grade is 3.00"))
+            print (self.e.get()+ (" Total score = ") + str(total_score)+ (" : Your grade is B"))
         elif total_score >= 65:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 2.50"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is C+"))
         elif total_score >= 60:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 2.00"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is C"))
         elif total_score >= 55:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 1.50"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is D+"))
         elif total_score >= 50:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 1.00"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is D"))
         elif total_score < 50:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is 0"))
+            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is F"))
 
     def hint(self):
         '''
@@ -157,17 +157,22 @@ class Student:
 
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         '''
-        cal_hint = sorted([[((int(self.b_exam_mid.get()) - int(self.s_exam_mid.get()))*(int(self.b_exam_mid.get()) / 100)), ("Midterm Exam")],\
-                    [((int(self.b_project.get()) - int(self.s_project.get()))*(int(self.b_project.get()) / 100)), ("Project")],\
-                    [((int(self.b_hw.get()) - int(self.s_hw.get()))*(int(self.b_hw.get())/ 100)), ("Homework")],\
-                    [((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Exam")],\
-                    [((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Other")],\
-                    [((int(self.b_exam_final.get()) - int(self.s_exam_final.get()))*(int(self.b_exam_final.get()) / 100)), ("Final Exam")]])
+        cal_hint = []
+        if int(self.s_exam_mid.get()) == 0:
+            cal_hint.append([((int(self.b_exam_mid.get()) - int(self.s_exam_mid.get()))*(int(self.b_exam_mid.get()) / 100)), ("Midterm Exam")])
+        if int(self.s_exam_final.get()) == 0:
+            cal_hint.append([((int(self.b_exam_final.get()) - int(self.s_exam_final.get()))*(int(self.b_exam_final.get()) / 100)), ("Final Exam")])
+            
+        cal_hint.append([((int(self.b_project.get()) - int(self.s_project.get()))*(int(self.b_project.get()) / 100)), ("Project")])
+        cal_hint.append([((int(self.b_hw.get()) - int(self.s_hw.get()))*(int(self.b_hw.get())/ 100)), ("Homework")])
+        cal_hint.append([((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Other")])
+        cal_hint.sort(reverse = True)
         print ("The Sequence of important score is")
-        count = 0
+        number = 1
+
         for i in cal_hint:
-            count += 1
-            print ("No."+str(count)+" "+i[1])
+            print ("No."+str(number)+" "+i[1])
+            number += 1
 
     def add_subject(self, event=""):
         """ New subject """
