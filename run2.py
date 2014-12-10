@@ -1,5 +1,5 @@
-from classes.student import *
-from classes.teacher import *
+from classes.studentUI import *
+from classes.teacherUI import *
 
 import tkinter as tk 
 class Run:
@@ -18,27 +18,17 @@ class Run:
         self.root.resizable(0, 0)
         self.root.title('Project PSIT "Get A"')
         
-        self.btn_std = tk.Button(self.root, text="Student", command=self.studentUI)
+        self.btn_std = tk.Button(self.root, text="Student", command=self.start_std_ui)
         self.btn_std.place(x=200, y=200)
 
-        self.btn_tch = tk.Button(self.root, text="Teacher")
+        self.btn_tch = tk.Button(self.root, text="Teacher", command=self.start_teah_ui)
         self.btn_tch.place(x=400, y=200)
         
-    def studentUI(self):
-        self.root.geometry("600x500")
-        self.root.resizable(0, 0)
-        self.root.title(' "Get A" : Student Mode')
-        
-        self.frame_subject = tk.Frame(self.root, bg="Blue")
-        self.frame_subject.place(width=300, height=250, x=0, y=0)
+    def start_std_ui(self):
+        StudentUI(self)
 
-        self.frame_edit = tk.Frame(self.root, width=400, height=300, bg="Red")
-        self.frame_edit.place(width=300, height=250, x=300, y=0)
-
-        self.frame_result = tk.Frame(self.root, width=800, height=300, bg="Yellow")
-        self.frame_result.place(width=600, height=250, x=0, y=250)
-
-        Student(self)
+    def start_teah_ui(self):
+        TeacherUI(self)
 
     def remove_select_level(self):
         self.btn_1.destroy()
