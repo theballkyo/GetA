@@ -38,10 +38,10 @@ class Run:
         self.frame_result = tk.Frame(self.root, width=800, height=300, bg="Yellow")
         self.frame_result.place(width=600, height=250, x=0, y=250)
 
-        #self.btn_1 = tk.Button(self.frame_subject, text='Highschool', command=self.set_highschool)
-        #self.btn_1.grid(row=0, column=0)
-        #self.btn_2 = tk.Button(self.frame_subject, text='University', command=self.set_university)
-        #self.btn_2.grid(row=0, column=1)
+        self.btn_1 = tk.Button(self.frame_subject, text='Highschool', command=self.set_highschool)
+        self.btn_1.grid(row=0, column=0)
+        self.btn_2 = tk.Button(self.frame_subject, text='University', command=self.set_university)
+        self.btn_2.grid(row=0, column=1)
 
     def remove_select_level(self):
         self.btn_1.destroy()

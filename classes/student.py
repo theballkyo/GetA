@@ -9,6 +9,9 @@ class Student:
         self.tk = parent.tk
         self.root = parent.root
         
+        self.listbox = self.tk.Listbox(self.root)
+        self.listbox.pack()
+        
         self.initUI()
 
     def initUI(self):
@@ -107,29 +110,6 @@ class Student:
         self.b_other.insert(0,text)
         return True
 
-    def add_subject(self, event=""):
-        """ New subject """
-        if len(self.SUBJECT_LIST) > 20:
-            self.tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
-            self.top.destroy()
-            return False
-
-        name = self.e.get()
-        if name == "":
-            self.tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
-            # self.top.destroy()
-            # self.new_subject()
-            self.e.focus()
-            return False
-
-        # New object subject
-        btn = Subject(self.tk, self.root, name)
-        self.SUBJECT_LIST.append(btn)
-        self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
-        self.set_e_text("")
-        self.get_subject()
-        self.e.focus()
-
     def get_subject(self):
         """ Get all subjects """
         for i in range(len(self.SUBJECT_LIST)):
@@ -188,12 +168,6 @@ class Student:
             count += 1
             print ("No."+str(count)+" "+i[1])
 
-    def set_e_text(self, text):
-        """ Set Entry Text """
-        self.e.delete(0, len(self.e.get()))
-        self.e.insert(0,text)
-        return True
-
     def add_subject(self, event=""):
         """ New subject """
         self.calculate()
@@ -212,7 +186,7 @@ class Student:
             return False
 
         # New object subject
-        btn = Subject(self.tk, self.root, name)
+        btn = Subject(self.tk, self.root, name, self.listbox)
         self.SUBJECT_LIST.append(btn)
         self.tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
         self.set_e_text("")
