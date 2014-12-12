@@ -39,30 +39,52 @@ class TeacherUI(SubjectUI):
             self.generate()
             
     def generate_normal(self):
-        self.gen = self.tk.Toplevel()
+        self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
-        self.gen.geometry("300x250")
+        self.gen.geometry("450x600")
         self.gen.resizable(0, 0)
         self.data_list.sort(reverse = True)
         num = 1
+        spc = 60
         for j in self.data_list:
+            self.tk.Label(self.gen, text=str(num), fg="White",bg="black").place(x=15, y = spc)
+            self.tk.Label(self.gen, text=str(j[1]), fg="White", bg="black").place(x=150, y = spc)
+            self.tk.Label(self.gen, text=str(j[0]), fg="White", bg="black").place(x=290, y = spc)
+
             if j[0] >= 80:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade A")
+                self.tk.Label(self.gen, text="A", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 75:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade B+")
+                self.tk.Label(self.gen, text="B+", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 70:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade B")
+                self.tk.Label(self.gen, text="B", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 65:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade C+")
+                self.tk.Label(self.gen, text="C+", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 60:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade C")
+                self.tk.Label(self.gen, text="C", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 55:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+ " Grade D+")
+                self.tk.Label(self.gen, text="D+", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 50:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade D")
+                self.tk.Label(self.gen, text="D", fg="White", bg="black").place(x=400, y = spc)
             else:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade F")
+                self.tk.Label(self.gen, text="F", fg="White", bg="black").place(x=400, y = spc)
             num += 1
+            spc += 20
+        score_board = self.tk.Label(self.gen, text="Score Board", fg="White",bg="black")
+        score_board.place(x=150, y=10)
+
+        sequence = self.tk.Label(self.gen, text="No.", fg="White",bg="black")
+        sequence.place(x=10,y=40)
+
+        name = self.tk.Label(self.gen, text="Name", fg="White", bg="black")
+        name.place(x=170, y = 40)
+
+        score = self.tk.Label(self.gen, text="Score", fg="White", bg="black")
+        score.place(x=300, y = 40)
+
+        grade = self.tk.Label(self.gen, text="Grade", fg="White", bg="black")
+        grade.place(x=400, y = 40)
+        
+          
             
     def generate(self):
         self.gen = self.tk.Toplevel()
