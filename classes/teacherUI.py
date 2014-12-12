@@ -12,6 +12,7 @@ class TeacherUI(SubjectUI):
         self.root = parent.root
         self.initUI()
         self.data_list = []
+        self.data_rule = []
 
     def initUI(self):
         self.root.geometry("600x500")
@@ -20,9 +21,11 @@ class TeacherUI(SubjectUI):
         
         self.frame_subject = self.tk.Frame(self.root, bg="White")
         self.frame_subject.place(width=600, height=500, x=0, y=0)
-
+        
+        self.btn_std = self.tk.Button(self.frame_subject, text="Make Rule", command=self.make_rule)
+        self.btn_std.place(x=200, y=20)
         self.btn_std = self.tk.Button(self.frame_subject, text="New Student", command=self.add_stu)
-        self.btn_std.place(x=260, y=20)
+        self.btn_std.place(x=300, y=20)
         self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
         self.listbox.place(x=230, y=50)
         self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.generate)
@@ -31,16 +34,127 @@ class TeacherUI(SubjectUI):
     def generate(self):
         self.gen = self.tk.Toplevel()
         self.gen.title("Result")
-        self.gen.geometry("600x500")
+        self.gen.geometry("300x250")
         self.gen.resizable(0, 0)
         self.data_list.sort(reverse = True)
         num = 1
-        for i in self.data_list:
-            print ("No."+str(num) +" Name: "+str(i[1])+" Score: "+str(i[0]))
+        a_grade = int(self.score_A.get())
+        bp_grade = int(self.score_Bp.get())
+        b_grade = int(self.score_B.get())
+        cp_grade = int(self.score_Cp.get())
+        c_grade = int(self.score_C.get())
+        dp_grade = int(self.score_Dp.get())
+        d_grade = int(self.score_D.get())
+        print ("Subject : "+(self.sub.get()))
+        temp = self.data_list[0][0]
+        count = 0
+        for j in self.data_list:
+            if a_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is A")
+                if j[0] == temp:
+                    if count == 0:
+                        count += 1
+                    elif count == 1:
+                        a_grade -= 1
+                    else:
+                        pass
+                else:                   
+                    a_grade -= 1
+            elif bp_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is B+")
+                if j[0] == temp:
+                    pass
+                else:
+                    bp_grade -= 1
+            elif b_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is B")
+                if j[0] == temp:
+                    pass
+                else:
+                    b_grade -= 1
+            elif cp_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is C+")
+                if j[0] == temp:
+                    pass
+                else:
+                    cp_grade -= 1
+            elif c_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is C")
+                if j[0] == temp:
+                    pass
+                else:
+                    c_grade -= 1
+            elif dp_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is D+")
+                if j[0] == temp:
+                    pass
+                else:
+                    dp_grade -= 1
+            elif d_grade != 0:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is D")
+                if j[0] == temp:
+                    pass
+                else:
+                    d_grade -= 1
+            else:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is F")
+            temp = j[0]
             num += 1
 
+            self.tk.Message(self.gen, text="Subject :"+self.sub.get(), width=500).grid(row=2, column=0)
         
 
+    def make_rule(self):
+        self.new = self.tk.Toplevel()
+        self.new.title("Make Rule")
+        self.new.geometry("300x300")
+        self.new.resizable(0, 0)
+        self.new.focus()
+
+        frame = self.tk.Frame(self.new)
+        frame.pack()
+
+        self.tk.Message(frame, text="Subject name : ", width=300).grid(row=0, column=0)
+        self.sub = self.tk.Entry(frame, width=10)
+        self.sub.grid(row=0, column=1, padx=5, pady=5)
+        self.sub.focus()
+        self.sub.bind("<Return>", self.add_rule)
+
+        self.tk.Message(frame, text="A :", width=30).grid(row=2, column=0)
+        self.score_A = self.tk.Entry(frame, width=5)
+        self.score_A.grid(row=2, column=1)
+
+        self.tk.Message(frame, text="B+ :", width=30).grid(row=4, column=0)
+        self.score_Bp = self.tk.Entry(frame, width=5)
+        self.score_Bp.grid(row=4, column=1)
+
+        self.tk.Message(frame, text="B :", width=30).grid(row=6, column=0)
+        self.score_B = self.tk.Entry(frame, width=5)
+        self.score_B.grid(row=6, column=1)
+
+        self.tk.Message(frame, text="C+ :", width=30).grid(row=8, column=0)
+        self.score_Cp = self.tk.Entry(frame, width=5)
+        self.score_Cp.grid(row=8, column=1)
+
+        self.tk.Message(frame, text="C :", width=30).grid(row=10, column=0)
+        self.score_C = self.tk.Entry(frame, width=5)
+        self.score_C.grid(row=10, column=1)
+
+        self.tk.Message(frame, text="D+ :", width=30).grid(row=12, column=0)
+        self.score_Dp = self.tk.Entry(frame, width=5)
+        self.score_Dp.grid(row=12, column=1)
+
+        self.tk.Message(frame, text="D :", width=30).grid(row=14, column=0)
+        self.score_D = self.tk.Entry(frame, width=5)
+        self.score_D.grid(row=14, column=1)
+
+        button_ok = self.tk.Button(frame, text='OK', command=self.add_rule)
+        button_ok.grid(row=16, column=1)
+        buttun_can = self.tk.Button(frame, text='Cancle', command='').grid(row=16, column =2)
+
+    def add_rule(self):
+        self.data_rule.append([int(self.score_A.get()), int(self.score_Bp.get()), int(self.score_B.get()), \
+                               int(self.score_Cp.get()), int(self.score_C.get()), int(self.score_Dp.get()), int(self.score_D.get())])
     def add_stu(self):
         self.new = self.tk.Toplevel()
         self.new.title("Data new student")
