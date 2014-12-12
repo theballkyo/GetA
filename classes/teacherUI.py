@@ -13,6 +13,7 @@ class TeacherUI(SubjectUI):
         self.initUI()
         self.data_list = []
         self.data_rule = []
+        self.check_mode = 0
 
     def initUI(self):
         self.root.geometry("600x500")
@@ -28,9 +29,41 @@ class TeacherUI(SubjectUI):
         self.btn_std.place(x=300, y=20)
         self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
         self.listbox.place(x=230, y=50)
-        self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.generate)
+        self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.select_gen)
         self.btn_cal.place(x=270, y=400)
-
+        
+    def select_gen(self):
+        if self.check_mode == 0:
+            self.generate_normal()
+        else:
+            self.generate()
+            
+    def generate_normal(self):
+        self.gen = self.tk.Toplevel()
+        self.gen.title("Result")
+        self.gen.geometry("300x250")
+        self.gen.resizable(0, 0)
+        self.data_list.sort(reverse = True)
+        num = 1
+        for j in self.data_list:
+            if j[0] >= 80:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade A")
+            elif j[0] >= 75:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade B+")
+            elif j[0] >= 70:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade B")
+            elif j[0] >= 65:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade C+")
+            elif j[0] >= 60:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade C")
+            elif j[0] >= 55:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+ " Grade D+")
+            elif j[0] >= 50:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade D")
+            else:
+                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade F")
+            num += 1
+            
     def generate(self):
         self.gen = self.tk.Toplevel()
         self.gen.title("Result")
@@ -105,6 +138,7 @@ class TeacherUI(SubjectUI):
         
 
     def make_rule(self):
+        self.check_mode = 1
         self.new = self.tk.Toplevel()
         self.new.title("Make Rule")
         self.new.geometry("300x300")
@@ -148,13 +182,15 @@ class TeacherUI(SubjectUI):
         self.score_D = self.tk.Entry(frame, width=5)
         self.score_D.grid(row=14, column=1)
 
-        button_ok = self.tk.Button(frame, text='OK', command=self.add_rule)
+        button_ok = self.tk.Button(frame, text='Add', command=self.add_rule)
         button_ok.grid(row=16, column=1)
-        buttun_can = self.tk.Button(frame, text='Cancle', command='').grid(row=16, column =2)
+        buttun_can = self.tk.Button(frame, text='Finish', command=self.new.destroy).grid(row=16, column =2)
 
     def add_rule(self):
-        self.data_rule.append([int(self.score_A.get()), int(self.score_Bp.get()), int(self.score_B.get()), \
-                               int(self.score_Cp.get()), int(self.score_C.get()), int(self.score_Dp.get()), int(self.score_D.get())])
+        self.data_rule = [int(self.score_A.get()), int(self.score_Bp.get()), int(self.score_B.get()), \
+                               int(self.score_Cp.get()), int(self.score_C.get()), int(self.score_Dp.get()), int(self.score_D.get())]
+        self.tk.messagebox.showinfo(message="Add Completed")
+        self.reset_rule("")
     def add_stu(self):
         self.new = self.tk.Toplevel()
         self.new.title("Data new student")
@@ -181,12 +217,39 @@ class TeacherUI(SubjectUI):
         self.score.grid(row=2, column=1)
       
 
-        button_ok = self.tk.Button(frame, text='OK', command=self.add_list)
+        button_ok = self.tk.Button(frame, text='Add', command=self.add_list)
         button_ok.grid(row=7, column=1)
-        buttun_can = self.tk.Button(frame, text='Cancle', command='').grid(row=7, column=2)
+        buttun_can = self.tk.Button(frame, text='Finish', command=self.new.destroy).grid(row=7, column=2)
+
+    def reset_rule(self, text):
+        self.sub.delete(0, len(self.sub.get()))
+        self.sub.insert(0,text)
+        self.score_A.delete(0, len(self.score_A.get()))
+        self.score_A.insert(0,text)
+        self.score_Bp.delete(0, len(self.score_Bp.get()))
+        self.score_Bp.insert(0,text)
+        self.score_B.delete(0, len(self.score_B.get()))
+        self.score_B.insert(0,text)
+        self.score_Cp.delete(0, len(self.score_Cp.get()))
+        self.score_Cp.insert(0,text)
+        self.score_C.delete(0, len(self.score_C.get()))
+        self.score_C.insert(0,text)
+        self.score_Dp.delete(0, len(self.score_Dp.get()))
+        self.score_Dp.insert(0,text)
+        self.score_D.delete(0, len(self.score_D.get()))
+        self.score_D.insert(0,text)
+    def reset_stu(self, text):
+        self.n.delete(0, len(self.n.get()))
+        self.n.insert(0,text)
+        self.s.delete(0, len(self.s.get()))
+        self.s.insert(0,text)
+        self.score.delete(0, len(self.score.get()))
+        self.score.insert(0,text)
 
     def add_list(self):
-        self.data_list.append([int(self.score.get()), self.n.get()+" "+self.s.get()])        
+        self.data_list.append([int(self.score.get()), self.n.get()+" "+self.s.get()])
+        self.tk.messagebox.showinfo(message="Add Completed")
+        self.reset_stu("")
     
     def new_subject_ui(self):
         """ Create UI for add new subject """
