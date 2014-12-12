@@ -87,76 +87,86 @@ class TeacherUI(SubjectUI):
           
             
     def generate(self):
-        self.gen = self.tk.Toplevel()
+        self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
-        self.gen.geometry("300x250")
+        self.gen.geometry("450x600")
         self.gen.resizable(0, 0)
         self.data_list.sort(reverse = True)
         num = 1
-        a_grade = int(self.score_A.get())
-        bp_grade = int(self.score_Bp.get())
-        b_grade = int(self.score_B.get())
-        cp_grade = int(self.score_Cp.get())
-        c_grade = int(self.score_C.get())
-        dp_grade = int(self.score_Dp.get())
-        d_grade = int(self.score_D.get())
-        print ("Subject : "+(self.sub.get()))
         temp = self.data_list[0][0]
         count = 0
+        spc = 60
         for j in self.data_list:
-            if a_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is A")
+            self.tk.Label(self.gen, text=str(num), fg="White",bg="black").place(x=15, y = spc)
+            self.tk.Label(self.gen, text=str(j[1]), fg="White", bg="black").place(x=150, y = spc)
+            self.tk.Label(self.gen, text=str(j[0]), fg="White", bg="black").place(x=290, y = spc)
+            if self.a_grade != 0:
+                self.tk.Label(self.gen, text="A", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     if count == 0:
                         count += 1
                     elif count == 1:
-                        a_grade -= 1
+                        self.a_grade -= 1
                     else:
                         pass
                 else:                   
-                    a_grade -= 1
-            elif bp_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is B+")
+                    self.a_grade -= 1
+            elif self.bp_grade != 0:
+                self.tk.Label(self.gen, text="B+", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     pass
                 else:
-                    bp_grade -= 1
-            elif b_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is B")
+                    self.bp_grade -= 1
+            elif self.b_grade != 0:
+                self.tk.Label(self.gen, text="B", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     pass
                 else:
-                    b_grade -= 1
-            elif cp_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is C+")
+                    self.b_grade -= 1
+            elif self.cp_grade != 0:
+                self.tk.Label(self.gen, text="C+", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     pass
                 else:
-                    cp_grade -= 1
-            elif c_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is C")
+                    self.cp_grade -= 1
+            elif self.c_grade != 0:
+                self.tk.Label(self.gen, text="C", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     pass
                 else:
-                    c_grade -= 1
-            elif dp_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is D+")
+                    self.c_grade -= 1
+            elif self.dp_grade != 0:
+                self.tk.Label(self.gen, text="D+", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     pass
                 else:
-                    dp_grade -= 1
-            elif d_grade != 0:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is D")
+                    self.dp_grade -= 1
+            elif self.d_grade != 0:
+                self.tk.Label(self.gen, text="D", fg="White", bg="black").place(x=400, y = spc)
                 if j[0] == temp:
                     pass
                 else:
-                    d_grade -= 1
+                    self.d_grade -= 1
             else:
-                print ("No."+str(num) +" Name: "+str(j[1])+" Score: "+str(j[0])+" Grade is F")
+                self.tk.Label(self.gen, text="F", fg="White", bg="black").place(x=400, y = spc)
             temp = j[0]
             num += 1
+            spc += 20
 
-            self.tk.Message(self.gen, text="Subject :"+self.sub.get(), width=500).grid(row=2, column=0)
+        score_board = self.tk.Label(self.gen, text="Score Board", fg="White",bg="black")
+        score_board.place(x=150, y=10)
+
+        sequence = self.tk.Label(self.gen, text="No.", fg="White",bg="black")
+        sequence.place(x=10,y=40)
+
+        name = self.tk.Label(self.gen, text="Name", fg="White", bg="black")
+        name.place(x=170, y = 40)
+
+        score = self.tk.Label(self.gen, text="Score", fg="White", bg="black")
+        score.place(x=300, y = 40)
+
+        grade = self.tk.Label(self.gen, text="Grade", fg="White", bg="black")
+        grade.place(x=400, y = 40)
         
 
     def make_rule(self):
@@ -211,6 +221,15 @@ class TeacherUI(SubjectUI):
     def add_rule(self):
         self.data_rule = [int(self.score_A.get()), int(self.score_Bp.get()), int(self.score_B.get()), \
                                int(self.score_Cp.get()), int(self.score_C.get()), int(self.score_Dp.get()), int(self.score_D.get())]
+        
+        self.a_grade = int(self.score_A.get())
+        self.bp_grade = int(self.score_Bp.get())
+        self.b_grade = int(self.score_B.get())
+        self.cp_grade = int(self.score_Cp.get())
+        self.c_grade = int(self.score_C.get())
+        self.dp_grade = int(self.score_Dp.get())
+        self.d_grade = int(self.score_D.get())
+        
         self.tk.messagebox.showinfo(message="Add Completed")
         self.reset_rule("")
     def add_stu(self):
