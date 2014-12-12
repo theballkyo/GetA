@@ -63,11 +63,12 @@ class StudentUI:
         self.edit_btn.grid(row=5, column=1)
 
         self.grade_frame = self.tk.Frame(self.frame_result, width=150, height=150, relief='raised')
-        self.tk.Message(self.grade_frame, text=' Your Grade is : ').place(x=10, y=10, width=100, height=50)
+        self.tk.Label(self.grade_frame, text=' Your Grade is : ').place(x=75, y=10, width=300, anchor='n')
         self.grade_frame.place(x=110, y=50)
 
         self.hint_frame = self.tk.LabelFrame(self.frame_result, text='Hint!!!', width=270, height=215)
         self.hint_frame.place(x=310, y=15)
+        self.tk.Label(self.hint_frame, text="The Sequence of important score is").place(x=130, y=10, anchor='n')
         
     def s_edit(self):
         sbj.s_exam_mid = self.e_s_exam_mid.get()
@@ -179,26 +180,28 @@ class StudentUI:
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         '''
-        total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
-        total_score = int(total_score)
-        if total_score >= 80:
-            print (self.e.get() + (" Total score = ") + str(total_score)+( " : Your grade is A"))
-        elif total_score >= 75:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is B+"))
-        elif total_score >= 70:
-            print (self.e.get()+ (" Total score = ") + str(total_score)+ (" : Your grade is B"))
-        elif total_score >= 65:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is C+"))
-        elif total_score >= 60:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is C"))
-        elif total_score >= 55:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is D+"))
-        elif total_score >= 50:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is D"))
-        elif total_score < 50:
-            print (self.e.get() + (" Total score = ") + str(total_score)+ (" : Your grade is F"))
+        self.total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
+        self.total_score = int(self.total_score)
+        if self.total_score >= 80:
+            self.tk.Label(self.grade_frame, text='A', font=('times',60)).place(x=45, y=30)
+        elif self.total_score >= 75:
+            self.tk.Label(self.grade_frame, text='B+', font=('times',60)).place(x=45, y=30)
+        elif self.total_score >= 70:
+            self.tk.Label(self.grade_frame, text='B', font=('times',60)).place(x=45, y=30)
+        elif self.total_score >= 65:
+            self.tk.Label(self.grade_frame, text='C+', font=('times',60)).place(x=45, y=30)
+        elif self.total_score >= 60:
+            self.tk.Label(self.grade_frame, text='C', font=('times',60)).place(x=45, y=30)
+        elif self.total_score >= 55:
+            self.tk.Label(self.grade_frame, text='D+', font=('times',60)).place(x=45, y=30)
+        elif self.total_score >= 50:
+            self.tk.Label(self.grade_frame, text='D', font=('times',60)).place(x=45, y=30)
+        elif self.total_score < 50:
+            self.tk.Message(self.grade_frame, text='F', font=('times',60)).place(x=45, y=30)
+            
+        self.tk.Label(self.grade_frame, text='Total Score =  '+str(self.total_score)).place(x=25, y=120)
 
-        self.progress.update(total_score)
+        self.progress.update(self.total_score)
 
     def hint(self):
         '''
@@ -220,12 +223,13 @@ class StudentUI:
         cal_hint.append([((int(self.b_hw.get()) - int(self.s_hw.get()))*(int(self.b_hw.get())/ 100)), ("Homework")])
         cal_hint.append([((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Other")])
         cal_hint.sort(reverse = True)
-        print ("The Sequence of important score is")
         number = 1
+        each_y = 50
 
         for i in cal_hint:
-            print ("No."+str(number)+" "+i[1])
+            self.tk.Message(self.hint_frame, text="No."+str(number)+"   "+i[1], width=100).place(x=80,y=each_y)
             number += 1
+            each_y += 25
 
     def add_subject(self, event=""):
         """ New subject """
