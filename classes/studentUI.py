@@ -40,8 +40,7 @@ class StudentUI:
                             command = self.new_subject_ui)
         new.grid(row=0, column=0)
 
-        b = self.tk.Button(self.frame_subject, text="Delete",
-                   command=lambda listbox=self.listbox: listbox.delete("anchor"), )
+        b = self.tk.Button(self.frame_subject, text="Delete", command=self.del_sbj)
         b.place(x=220, y=200)
         
         self.edit_score = self.tk.LabelFrame(self.frame_edit, text="Edit Score", padx=5, pady=5)
@@ -74,6 +73,10 @@ class StudentUI:
         self.hint_frame.place(x=310, y=15)
         self.tk.Label(self.hint_frame, text="The Sequence of important score is").place(x=130, y=10, anchor='n')
         
+    def del_sbj(self):
+        index = int(self.listbox.curselection()[0]) - 1
+        del(self.SUBJECT_LIST[index])
+        self.listbox.delete("anchor")
     def s_edit(self):
         # index = int(self.listbox.curselection()[0])
         index = self.lb_sel_i
