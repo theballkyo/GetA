@@ -32,7 +32,7 @@ class StudentUI:
         self.progress = Progressbar(self.frame_result, 20, 200, 100)
         self.progress.update(0)
         
-        self.listbox = self.tk.Listbox(self.frame_subject, width=28, height = 11)
+        self.listbox = self.tk.Listbox(self.frame_subject, width=23, height = 11)
         self.listbox.place(x=30, y=40)
         self.listbox.bind('<<ListboxSelect>>', self.onselect)
 
@@ -46,19 +46,19 @@ class StudentUI:
         self.edit_score = self.tk.LabelFrame(self.frame_edit, text="Edit Score", padx=5, pady=5)
         self.edit_score.place(x=30, y=30)
 
-        self.tk.Message(self.edit_score, text="Midterm :", width=80).grid(row=0, column=0)
+        self.tk.Label(self.edit_score, text="Midterm :", width=10).grid(row=0, column=0)
         self.e_s_exam_mid = self.tk.Entry(self.edit_score, width=5)
         self.e_s_exam_mid.grid(row=0, column=1)
-        self.tk.Message(self.edit_score, text="Final :", width=50).grid(row=1, column=0)
+        self.tk.Label(self.edit_score, text="Final :", width=10).grid(row=1, column=0)
         self.e_s_exam_final = self.tk.Entry(self.edit_score, width=5)
         self.e_s_exam_final.grid(row=1, column=1)
-        self.tk.Message(self.edit_score, text="Project :", width=50).grid(row=2, column=0)
+        self.tk.Label(self.edit_score, text="Project :", width=10).grid(row=2, column=0)
         self.e_s_project = self.tk.Entry(self.edit_score, width=5)
         self.e_s_project.grid(row=2, column=1)
-        self.tk.Message(self.edit_score, text="Homework :", width=80).grid(row=3, column=0)
+        self.tk.Label(self.edit_score, text="Homework :", width=10).grid(row=3, column=0)
         self.e_s_hw = self.tk.Entry(self.edit_score, width=5)
         self.e_s_hw.grid(row=3, column=1)
-        self.tk.Message(self.edit_score, text="Other :", width=50).grid(row=4, column=0)
+        self.tk.Label(self.edit_score, text="Other :", width=10).grid(row=4, column=0)
         self.e_s_other = self.tk.Entry(self.edit_score, width=5)
         self.e_s_other.grid(row=4, column=1)
 
@@ -95,51 +95,51 @@ class StudentUI:
         """ Create UI for add new subject """
         self.top = self.tk.Toplevel()
         self.top.title("Add new subject")
-        self.top.geometry("300x260")
+        self.top.geometry("320x250")
         self.top.resizable(0, 0)
         self.top.focus()
 
         frame = self.tk.Frame(self.top)
         frame.pack()
 
-        self.tk.Message(frame, text="Subject Name : ").grid(row=0, column=0)
+        self.tk.Label(frame, text="Subject Name : ").grid(row=0, column=0)
         self.e = self.tk.Entry(frame, width=10)
         self.e.grid(row=0, column=1, padx=5, pady=5)
         self.e.focus()
         self.e.bind("<Return>", self.add_subject)
         
-        self.tk.Message(frame, text="Weight :", width=50).grid(row=0, column=2)
+        self.tk.Label(frame, text="Weight :").grid(row=0, column=2)
         self.weight = self.tk.Entry(frame, width=3)
         self.weight.grid(row=0, column=3, padx=5, pady=5)
 
-        self.tk.Message(frame, text="Score", width=50).grid(row=1, column=1)
-        self.tk.Message(frame, text="Max", width=50).grid(row=1, column=2)
+        self.tk.Label(frame, text="Score").grid(row=1, column=1)
+        self.tk.Label(frame, text="Max").grid(row=1, column=2)
         
-        self.tk.Message(frame, text="Midterm :", width=80).grid(row=2, column=0)
+        self.tk.Label(frame, text="Midterm :").grid(row=2, column=0)
         self.s_exam_mid = self.tk.Entry(frame, width=5)
         self.s_exam_mid.grid(row=2, column=1)
         self.b_exam_mid = self.tk.Entry(frame, width=5)
         self.b_exam_mid.grid(row=2, column=2)
 
-        self.tk.Message(frame, text="Final :", width=50).grid(row=3, column=0)
+        self.tk.Label(frame, text="Final :").grid(row=3, column=0)
         self.s_exam_final = self.tk.Entry(frame, width=5)
         self.s_exam_final.grid(row=3, column=1)
         self.b_exam_final = self.tk.Entry(frame, width=5)
         self.b_exam_final.grid(row=3, column=2)
 
-        self.tk.Message(frame, text="Project :", width=50).grid(row=4, column=0)
+        self.tk.Label(frame, text="Project :").grid(row=4, column=0)
         self.s_project = self.tk.Entry(frame, width=5)
         self.s_project.grid(row=4, column=1)
         self.b_project = self.tk.Entry(frame, width=5)
         self.b_project.grid(row=4, column=2)
 
-        self.tk.Message(frame, text="Homework :", width=80).grid(row=5, column=0)
+        self.tk.Label(frame, text="Homework :").grid(row=5, column=0)
         self.s_hw = self.tk.Entry(frame, width=5)
         self.s_hw.grid(row=5, column=1)
         self.b_hw = self.tk.Entry(frame, width=5)
         self.b_hw.grid(row=5, column=2)
 
-        self.tk.Message(frame, text="Other :", width=50).grid(row=6, column=0)
+        self.tk.Label(frame, text="Other :").grid(row=6, column=0)
         self.s_other = self.tk.Entry(frame, width=5)
         self.s_other.grid(row=6, column=1)
         self.b_other = self.tk.Entry(frame, width=5)
@@ -200,21 +200,21 @@ class StudentUI:
                          + int(self.SUBJECT_LIST[i].s_hw) + int(self.SUBJECT_LIST[i].s_other)
         self.total_score = int(self.total_score)
         if self.total_score >= 80:
-            self.tk.Label(self.grade_frame, text='A', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='A', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 75:
-            self.tk.Label(self.grade_frame, text='B+', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='B+', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 70:
-            self.tk.Label(self.grade_frame, text='B', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='B', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 65:
-            self.tk.Label(self.grade_frame, text='C+', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='C+', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 60:
-            self.tk.Label(self.grade_frame, text='C', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='C', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 55:
-            self.tk.Label(self.grade_frame, text='D+', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='D+', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 50:
-            self.tk.Label(self.grade_frame, text='D', font=('times',60)).place(x=45, y=30)
+            self.tk.Label(self.grade_frame, text='D', font=('times',60)).place(x=35, y=30)
         elif self.total_score < 50:
-            self.tk.Message(self.grade_frame, text='F', font=('times',60)).place(x=45, y=30)
+            self.tk.Message(self.grade_frame, text='F', font=('times',60)).place(x=35, y=30)
             
         self.tk.Label(self.grade_frame, text='Total Score =  '+str(self.total_score)).place(x=25, y=120)
 
@@ -245,7 +245,7 @@ class StudentUI:
         each_y = 50
 
         for i in cal_hint:
-            self.tk.Message(self.hint_frame, text="No."+str(number)+"   "+i[1], width=100).place(x=80,y=each_y)
+            self.tk.Label(self.hint_frame, text="No."+str(number)+"   "+i[1]).place(x=80,y=each_y)
             number += 1
             each_y += 25
 
@@ -284,6 +284,7 @@ class StudentUI:
         self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
         self.lb_sel_i = self.listbox.size() - 1
         print (self.lb_sel_i)
+        self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
         self.calculate()
         self.hint()
         self.set_e_text("")
@@ -310,6 +311,8 @@ class StudentUI:
 
         self.e_s_other.delete(0, len(self.e_s_other.get()))
         self.e_s_other.insert(0, self.SUBJECT_LIST[index].weight)
+
+        self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
 
         self.calculate()
         self.hint()
