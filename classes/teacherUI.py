@@ -35,7 +35,7 @@ class TeacherUI(SubjectUI):
         self.btn_cal.place(x=270, y=430)
 
     def del_std(self):
-        index = int(self.listbox.curselection()[0]) - 1
+        index = int(self.listbox.curselection()[0])
         del(self.data_list[index])
         self.listbox.delete("anchor")
 
@@ -50,10 +50,10 @@ class TeacherUI(SubjectUI):
         self.gen.title("Result")
         self.gen.geometry("450x600")
         self.gen.resizable(0, 0)
-        self.data_list.sort(reverse = True)
+        # self.data_list.sort(reverse = True)
         num = 1
         spc = 60
-        for j in self.data_list:
+        for j in sorted(self.data_list, reverse=True):
             self.tk.Label(self.gen, text=str(num), fg="White",bg="black").place(x=15, y = spc)
             self.tk.Label(self.gen, text=str(j[1]), fg="White", bg="black").place(x=150, y = spc)
             self.tk.Label(self.gen, text=str(j[0]), fg="White", bg="black").place(x=290, y = spc)

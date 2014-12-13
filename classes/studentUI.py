@@ -74,7 +74,7 @@ class StudentUI:
         self.tk.Label(self.hint_frame, text="The Sequence of important score is").place(x=130, y=10, anchor='n')
         
     def del_sbj(self):
-        index = int(self.listbox.curselection()[0]) - 1
+        index = int(self.listbox.curselection()[0])
         del(self.SUBJECT_LIST[index])
         self.listbox.delete("anchor")
     def s_edit(self):
