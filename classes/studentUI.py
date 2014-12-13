@@ -12,6 +12,7 @@ class StudentUI:
         self.root = parent.root
         self.STD_LIST = {0: "test"}
         self.initUI()
+        self.lb_sel_i = -1
     
         
     def initUI(self):
@@ -33,9 +34,12 @@ class StudentUI:
         
         self.listbox = self.tk.Listbox(self.frame_subject, width=28, height = 11)
         self.listbox.place(x=30, y=40)
+        self.listbox.bind('<<ListboxSelect>>', self.onselect)
+
         new = self.tk.Button(self.frame_subject, text='New Subject',
                             command = self.new_subject_ui)
         new.grid(row=0, column=0)
+
         b = self.tk.Button(self.frame_subject, text="Delete",
                    command=lambda listbox=self.listbox: listbox.delete("anchor"), )
         b.place(x=220, y=200)
@@ -71,11 +75,18 @@ class StudentUI:
         self.tk.Label(self.hint_frame, text="The Sequence of important score is").place(x=130, y=10, anchor='n')
         
     def s_edit(self):
-        sbj.s_exam_mid = self.e_s_exam_mid.get()
-        sbj.s_final = self.e_s_exam_final.get()
-        sbj.s_project = self.e_s_project.get()
-        sbj.s_hw = self.e_s_hw.get()
-        sbj.s_other = self.e_s_other.get()
+        # index = int(self.listbox.curselection()[0])
+        index = self.lb_sel_i
+        if index == -1:
+            return False
+        print (index)
+        self.SUBJECT_LIST[index].s_exam_mid = self.e_s_exam_mid.get()
+        self.SUBJECT_LIST[index].s_final = self.e_s_exam_final.get()
+        self.SUBJECT_LIST[index].s_project = self.e_s_project.get()
+        self.SUBJECT_LIST[index].s_hw = self.e_s_hw.get()
+        self.SUBJECT_LIST[index].s_other = self.e_s_other.get()
+        self.calculate()
+        self.hint()
 
     def new_subject_ui(self):
         """ Create UI for add new subject """
@@ -167,6 +178,7 @@ class StudentUI:
         """ Get all subjects """
         for i in range(len(self.SUBJECT_LIST)):
             print (i, self.SUBJECT_LIST[i].get_text())
+            print (i, self.SUBJECT_LIST[i].s_exam_mid)
         print ("------------------------------------")
 
     def calculate(self):
@@ -180,7 +192,9 @@ class StudentUI:
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         '''
-        self.total_score = int(self.s_exam_mid.get()) + int(self.s_exam_final.get()) + int(self.s_project.get()) + int(self.s_hw.get()) + int(self.s_other.get())
+        i = self.lb_sel_i
+        self.total_score = int(self.SUBJECT_LIST[i].s_exam_mid) + int(self.SUBJECT_LIST[i].s_final) + int(self.SUBJECT_LIST[i].s_project) \
+                         + int(self.SUBJECT_LIST[i].s_hw) + int(self.SUBJECT_LIST[i].s_other)
         self.total_score = int(self.total_score)
         if self.total_score >= 80:
             self.tk.Label(self.grade_frame, text='A', font=('times',60)).place(x=45, y=30)
@@ -214,14 +228,15 @@ class StudentUI:
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
         '''
         cal_hint = []
-        if int(self.s_exam_mid.get()) == 0:
-            cal_hint.append([((int(self.b_exam_mid.get()) - int(self.s_exam_mid.get()))*(int(self.b_exam_mid.get()) / 100)), ("Midterm Exam")])
-        if int(self.s_exam_final.get()) == 0:
-            cal_hint.append([((int(self.b_exam_final.get()) - int(self.s_exam_final.get()))*(int(self.b_exam_final.get()) / 100)), ("Final Exam")])
+        i = self.lb_sel_i
+        if int(self.SUBJECT_LIST[i].s_exam_mid) == 0:
+            cal_hint.append([((int(self.SUBJECT_LIST[i].m_exam_mid) - int(self.SUBJECT_LIST[i].s_exam_mid))*(int(self.SUBJECT_LIST[i].m_exam_mid) / 100)), ("Midterm Exam")])
+        if int(self.SUBJECT_LIST[i].s_final) == 0:
+            cal_hint.append([( (int(self.SUBJECT_LIST[i].m_final) - int(self.SUBJECT_LIST[i].s_final)) * (int(self.SUBJECT_LIST[i].m_final) / 100) ), ("Final Exam")])
             
-        cal_hint.append([((int(self.b_project.get()) - int(self.s_project.get()))*(int(self.b_project.get()) / 100)), ("Project")])
-        cal_hint.append([((int(self.b_hw.get()) - int(self.s_hw.get()))*(int(self.b_hw.get())/ 100)), ("Homework")])
-        cal_hint.append([((int(self.b_other.get()) - int(self.s_other.get()))*(int(self.b_other.get()) / 100)), ("Other")])
+        cal_hint.append([((int(self.SUBJECT_LIST[i].m_project) - int(self.SUBJECT_LIST[i].s_project))*(int(self.SUBJECT_LIST[i].m_project) / 100)), ("Project")])
+        cal_hint.append([((int(self.SUBJECT_LIST[i].m_hw) - int(self.SUBJECT_LIST[i].s_hw))*(int(self.SUBJECT_LIST[i].m_hw)/ 100)), ("Homework")])
+        cal_hint.append([((int(self.SUBJECT_LIST[i].m_other) - int(self.SUBJECT_LIST[i].s_other))*(int(self.SUBJECT_LIST[i].m_other) / 100)), ("Other")])
         cal_hint.sort(reverse = True)
         number = 1
         each_y = 50
@@ -233,12 +248,6 @@ class StudentUI:
 
     def add_subject(self, event=""):
         """ New subject """
-        self.calculate()
-        self.hint()
-        if len(self.SUBJECT_LIST) > 20:
-            self.tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
-            self.top.destroy()
-            return False
 
         self.name = self.e.get()
         if self.name == "":
@@ -270,7 +279,36 @@ class StudentUI:
 
         self.SUBJECT_LIST.append(sbj)
         self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
+        self.lb_sel_i = self.listbox.size() - 1
+        print (self.lb_sel_i)
+        self.calculate()
+        self.hint()
         self.set_e_text("")
         self.get_subject()
         self.e.focus()
 
+    def onselect(self, event=""):
+        # Note here that Tkinter passes an event object to onselect()
+        w = event.widget
+        index = int(w.curselection()[0])
+        self.lb_sel_i = index
+        value = w.get(index)
+        self.e_s_exam_mid.delete(0, len(self.e_s_exam_mid.get()))
+        self.e_s_exam_mid.insert(0, self.SUBJECT_LIST[index].s_exam_mid)
+
+        self.e_s_exam_final.delete(0, len(self.e_s_exam_final.get()))
+        self.e_s_exam_final.insert(0, self.SUBJECT_LIST[index].m_final)
+
+        self.e_s_project.delete(0, len(self.e_s_project.get()))
+        self.e_s_project.insert(0, self.SUBJECT_LIST[index].m_project)
+
+        self.e_s_hw.delete(0, len(self.e_s_hw.get()))
+        self.e_s_hw.insert(0, self.SUBJECT_LIST[index].m_hw)
+
+        self.e_s_other.delete(0, len(self.e_s_other.get()))
+        self.e_s_other.insert(0, self.SUBJECT_LIST[index].weight)
+
+        self.calculate()
+        self.hint()
+        
+        print ('You selected item %d: "%s"' % (index, value))
