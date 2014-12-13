@@ -19,20 +19,24 @@ class StudentUI:
         self.root.geometry("600x500")
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Student Mode')
+
+        bg_image = self.tk.PhotoImage(file= 'classes/Bg_2.gif')
+        self.background = self.tk.Label(self.root,image = bg_image)
+        self.background.place(x=0, y=0)
         
-        self.frame_subject = self.tk.Frame(self.root, bg="Blue")
-        self.frame_subject.place(width=300, height=250, x=0, y=0)
+        self.frame_subject = self.tk.Frame(self.background, bg='#0e451f')
+        self.frame_subject.place(width=240, height=200, x=35, y=30)
 
-        self.frame_edit = self.tk.Frame(self.root, width=400, height=300, bg="Red")
-        self.frame_edit.place(width=300, height=250, x=300, y=0)
+        self.frame_edit = self.tk.Frame(self.background, bg='#0e451f')
+        self.frame_edit.place(width=250, height=200, x=300, y=30)
 
-        self.frame_result = self.tk.Frame(self.root, width=800, height=300, bg="Yellow")
-        self.frame_result.place(width=600, height=250, x=0, y=250)
+        self.frame_result = self.tk.Frame(self.background, bg='#0e451f')
+        self.frame_result.place(width=530, height=210, x=35, y=230)
 
-        self.progress = Progressbar(self.frame_result, 20, 200, 100)
+        self.progress = Progressbar(self.frame_result, 20, 160, 100)
         self.progress.update(0)
         
-        self.listbox = self.tk.Listbox(self.frame_subject, width=23, height = 11)
+        self.listbox = self.tk.Listbox(self.frame_subject, width=20, height = 9)
         self.listbox.place(x=30, y=40)
         self.listbox.bind('<<ListboxSelect>>', self.onselect)
 
@@ -41,7 +45,7 @@ class StudentUI:
         new.grid(row=0, column=0)
 
         b = self.tk.Button(self.frame_subject, text="Delete", command=self.del_sbj)
-        b.place(x=220, y=200)
+        b.place(x=180, y=150)
         
         self.edit_score = self.tk.LabelFrame(self.frame_edit, text="Edit Score", padx=5, pady=5)
         self.edit_score.place(x=30, y=30)
@@ -61,18 +65,19 @@ class StudentUI:
         self.tk.Label(self.edit_score, text="Other :", width=10).grid(row=4, column=0)
         self.e_s_other = self.tk.Entry(self.edit_score, width=5)
         self.e_s_other.grid(row=4, column=1)
+        self.e_s_other.bind("<Return>", self.s_edit)
 
         self.edit_btn = self.tk.Button(self.edit_score, text="Edit", command=self.s_edit)
         self.edit_btn.grid(row=5, column=1)
 
         self.grade_frame = self.tk.Frame(self.frame_result, width=150, height=150, relief='raised')
         self.tk.Label(self.grade_frame, text=' Your Grade is : ').place(x=75, y=10, width=300, anchor='n')
-        self.grade_frame.place(x=110, y=50)
+        self.grade_frame.place(x=120, y=40)
 
-        self.hint_frame = self.tk.LabelFrame(self.frame_result, text='Hint!!!', width=270, height=215)
-        self.hint_frame.place(x=310, y=15)
-        self.tk.Label(self.hint_frame, text="The Sequence of important score is").place(x=130, y=10, anchor='n')
-        
+        self.hint_frame = self.tk.LabelFrame(self.frame_result, text='Hint!!!', width=200, height=190)
+        self.hint_frame.place(x=320, y=15)
+        self.tk.Label(self.hint_frame, text="Priority of Score is : ").place(x=100, y=10, anchor='n')
+        self.root.mainloop()
     def del_sbj(self):
         index = int(self.listbox.curselection()[0])
         del(self.SUBJECT_LIST[index])
@@ -83,11 +88,11 @@ class StudentUI:
         if index == -1:
             return False
         print ('index',index)
-        self.SUBJECT_LIST[index+1].s_exam_mid = self.e_s_exam_mid.get()
-        self.SUBJECT_LIST[index+1].s_final = self.e_s_exam_final.get()
-        self.SUBJECT_LIST[index+1].s_project = self.e_s_project.get()
-        self.SUBJECT_LIST[index+1].s_hw = self.e_s_hw.get()
-        self.SUBJECT_LIST[index+1].s_other = self.e_s_other.get()
+        self.SUBJECT_LIST[index].s_exam_mid = self.e_s_exam_mid.get()
+        self.SUBJECT_LIST[index].s_final = self.e_s_exam_final.get()
+        self.SUBJECT_LIST[index].s_project = self.e_s_project.get()
+        self.SUBJECT_LIST[index].s_hw = self.e_s_hw.get()
+        self.SUBJECT_LIST[index].s_other = self.e_s_other.get()
         self.calculate()
         self.hint()
 
@@ -144,6 +149,7 @@ class StudentUI:
         self.s_other.grid(row=6, column=1)
         self.b_other = self.tk.Entry(frame, width=5)
         self.b_other.grid(row=6, column=2)
+        self.b_other.bind("<Return>", self.add_subject)
         
         button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
         button_ok.grid(row=7, column=1)
@@ -243,11 +249,11 @@ class StudentUI:
         cal_hint.append([((int(self.SUBJECT_LIST[i].m_other) - int(self.SUBJECT_LIST[i].s_other))*(int(self.SUBJECT_LIST[i].m_other) / 100)), ("Other")])
         cal_hint.sort(reverse = True)
         number = 1
-        each_y = 50
+        each_y = 40
         self.tk.Label(self.hint_frame, width=270, height=180).place(x=0,y=30)
         
         for i in cal_hint:
-            self.tk.Label(self.hint_frame, text="No."+str(number)+"   "+i[1]).place(x=80,y=each_y)
+            self.tk.Label(self.hint_frame, text="No."+str(number)+"   "+i[1]).place(x=50,y=each_y)
             number += 1
             each_y += 25
 
