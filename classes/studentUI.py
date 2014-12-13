@@ -302,16 +302,16 @@ class StudentUI:
         self.e_s_exam_mid.insert(0, self.SUBJECT_LIST[index].s_exam_mid)
 
         self.e_s_exam_final.delete(0, len(self.e_s_exam_final.get()))
-        self.e_s_exam_final.insert(0, self.SUBJECT_LIST[index].m_final)
+        self.e_s_exam_final.insert(0, self.SUBJECT_LIST[index].s_final)
 
         self.e_s_project.delete(0, len(self.e_s_project.get()))
-        self.e_s_project.insert(0, self.SUBJECT_LIST[index].m_project)
+        self.e_s_project.insert(0, self.SUBJECT_LIST[index].s_project)
 
         self.e_s_hw.delete(0, len(self.e_s_hw.get()))
-        self.e_s_hw.insert(0, self.SUBJECT_LIST[index].m_hw)
+        self.e_s_hw.insert(0, self.SUBJECT_LIST[index].s_hw)
 
         self.e_s_other.delete(0, len(self.e_s_other.get()))
-        self.e_s_other.insert(0, self.SUBJECT_LIST[index].weight)
+        self.e_s_other.insert(0, self.SUBJECT_LIST[index].s_other)
 
         self.calculate()
         self.hint()
