@@ -82,12 +82,12 @@ class StudentUI:
         index = self.lb_sel_i
         if index == -1:
             return False
-        print (index)
-        self.SUBJECT_LIST[index].s_exam_mid = self.e_s_exam_mid.get()
-        self.SUBJECT_LIST[index].s_final = self.e_s_exam_final.get()
-        self.SUBJECT_LIST[index].s_project = self.e_s_project.get()
-        self.SUBJECT_LIST[index].s_hw = self.e_s_hw.get()
-        self.SUBJECT_LIST[index].s_other = self.e_s_other.get()
+        print ('index',index)
+        self.SUBJECT_LIST[index+1].s_exam_mid = self.e_s_exam_mid.get()
+        self.SUBJECT_LIST[index+1].s_final = self.e_s_exam_final.get()
+        self.SUBJECT_LIST[index+1].s_project = self.e_s_project.get()
+        self.SUBJECT_LIST[index+1].s_hw = self.e_s_hw.get()
+        self.SUBJECT_LIST[index+1].s_other = self.e_s_other.get()
         self.calculate()
         self.hint()
 
@@ -199,6 +199,7 @@ class StudentUI:
         self.total_score = int(self.SUBJECT_LIST[i].s_exam_mid) + int(self.SUBJECT_LIST[i].s_final) + int(self.SUBJECT_LIST[i].s_project) \
                          + int(self.SUBJECT_LIST[i].s_hw) + int(self.SUBJECT_LIST[i].s_other)
         self.total_score = int(self.total_score)
+        self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
         if self.total_score >= 80:
             self.tk.Label(self.grade_frame, text='A', font=('times',60)).place(x=35, y=30)
         elif self.total_score >= 75:
@@ -243,7 +244,8 @@ class StudentUI:
         cal_hint.sort(reverse = True)
         number = 1
         each_y = 50
-
+        self.tk.Label(self.hint_frame, width=270, height=180).place(x=0,y=30)
+        
         for i in cal_hint:
             self.tk.Label(self.hint_frame, text="No."+str(number)+"   "+i[1]).place(x=80,y=each_y)
             number += 1
@@ -284,7 +286,6 @@ class StudentUI:
         self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
         self.lb_sel_i = self.listbox.size() - 1
         print (self.lb_sel_i)
-        self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
         self.calculate()
         self.hint()
         self.set_e_text("")
@@ -311,8 +312,6 @@ class StudentUI:
 
         self.e_s_other.delete(0, len(self.e_s_other.get()))
         self.e_s_other.insert(0, self.SUBJECT_LIST[index].weight)
-
-        self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
 
         self.calculate()
         self.hint()
