@@ -29,9 +29,16 @@ class TeacherUI(SubjectUI):
         self.btn_std.place(x=300, y=20)
         self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
         self.listbox.place(x=230, y=50)
+        self.btn_del = self.tk.Button(self.frame_subject, text="Delete", command=self.del_std)
+        self.btn_del.place(x=270, y=400)
         self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.select_gen)
-        self.btn_cal.place(x=270, y=400)
-        
+        self.btn_cal.place(x=270, y=430)
+
+    def del_std(self):
+        index = int(self.listbox.curselection()[0]) - 1
+        del(self.data_list[index])
+        self.listbox.delete("anchor")
+
     def select_gen(self):
         if self.check_mode == 0:
             self.generate_normal()
@@ -257,6 +264,7 @@ class TeacherUI(SubjectUI):
         self.score = self.tk.Entry(frame, width=5)
         self.score.grid(row=2, column=1)
       
+        self.score.bind("<Return>", self.add_list)
 
         button_ok = self.tk.Button(frame, text='Add', command=self.add_list)
         button_ok.grid(row=7, column=1)
@@ -287,9 +295,12 @@ class TeacherUI(SubjectUI):
         self.score.delete(0, len(self.score.get()))
         self.score.insert(0,text)
 
-    def add_list(self):
+    def add_list(self, event=""):
         self.data_list.append([int(self.score.get()), self.n.get()+" "+self.s.get()])
+        self.listbox.insert("end", self.n.get()+" "+self.s.get())
         self.tk.messagebox.showinfo(message="Add Completed")
+        self.new.focus()
+        self.n.focus()
         self.reset_stu("")
     
     def new_subject_ui(self):
