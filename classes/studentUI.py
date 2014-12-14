@@ -75,12 +75,12 @@ class StudentUI:
         self.edit_btn.place(x=160, y=35)
 
         grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
-        self.grade_frame = self.tk.Label(self.frame_result,image=grade_frame_image, width=195, height=155, bg='#0e451f')
+        self.grade_frame = self.tk.Label(self.frame_result, image=grade_frame_image, bg='#0e451f')
         self.grade_frame.place(x=100, y=15)
 
-        self.hint_frame = self.tk.LabelFrame(self.frame_result, text='Hint!!!', width=200, height=190)
-        self.hint_frame.place(x=320, y=15)
-        self.tk.Label(self.hint_frame, text="Priority of Score is : ").place(x=100, y=10, anchor='n')
+        hint_image = self.tk.PhotoImage(file= 'classes/hint.gif')
+        self.hint_frame = self.tk.Label(self.frame_result, image=hint_image, bg='#0e451f')
+        self.hint_frame.place(x=300, y=15)
         self.root.mainloop()
         
     def del_sbj(self):
@@ -249,22 +249,22 @@ class StudentUI:
         cal_hint = []
         i = self.lb_sel_i
         if int(self.SUBJECT_LIST[i].s_exam_mid) == 0:
-            cal_hint.append([((int(self.SUBJECT_LIST[i].m_exam_mid) - int(self.SUBJECT_LIST[i].s_exam_mid))*(int(self.SUBJECT_LIST[i].m_exam_mid) / 100)), ("Midterm Exam")])
+            cal_hint.append([((int(self.SUBJECT_LIST[i].m_exam_mid) - int(self.SUBJECT_LIST[i].s_exam_mid))*(int(self.SUBJECT_LIST[i].m_exam_mid) / 100)), ("Midterm")])
         if int(self.SUBJECT_LIST[i].s_final) == 0:
-            cal_hint.append([( (int(self.SUBJECT_LIST[i].m_final) - int(self.SUBJECT_LIST[i].s_final)) * (int(self.SUBJECT_LIST[i].m_final) / 100) ), ("Final Exam")])
+            cal_hint.append([( (int(self.SUBJECT_LIST[i].m_final) - int(self.SUBJECT_LIST[i].s_final)) * (int(self.SUBJECT_LIST[i].m_final) / 100) ), ("Final")])
             
         cal_hint.append([((int(self.SUBJECT_LIST[i].m_project) - int(self.SUBJECT_LIST[i].s_project))*(int(self.SUBJECT_LIST[i].m_project) / 100)), ("Project")])
         cal_hint.append([((int(self.SUBJECT_LIST[i].m_hw) - int(self.SUBJECT_LIST[i].s_hw))*(int(self.SUBJECT_LIST[i].m_hw)/ 100)), ("Homework")])
         cal_hint.append([((int(self.SUBJECT_LIST[i].m_other) - int(self.SUBJECT_LIST[i].s_other))*(int(self.SUBJECT_LIST[i].m_other) / 100)), ("Other")])
         cal_hint.sort(reverse = True)
         number = 1
-        each_y = 40
-        self.tk.Label(self.hint_frame, width=270, height=180).place(x=0,y=30)
+        each_y = 43
+        self.tk.Label(self.hint_frame, width=25, height=6, bg='#0e451f').place(x=10,y=45)
         
         for i in cal_hint:
-            self.tk.Label(self.hint_frame, text="No."+str(number)+"   "+i[1]).place(x=50,y=each_y)
+            self.tk.Label(self.hint_frame, text="No."+str(number)+"   "+i[1], bg='#0e451f',fg = 'white',font=('times',10)).place(x=50,y=each_y)
             number += 1
-            each_y += 25
+            each_y += 20
 
     def add_subject(self, event=""):
         """ New subject """
