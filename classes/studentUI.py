@@ -13,7 +13,7 @@ class StudentUI:
         self.STD_LIST = {0: "test"}
         self.initUI()
         self.lb_sel_i = -1
-    
+        self.root.mainloop()
         
     def initUI(self):
         self.root.geometry("600x500")
@@ -24,60 +24,65 @@ class StudentUI:
         self.background = self.tk.Label(self.root,image = bg_image)
         self.background.place(x=0, y=0)
         
-        self.frame_subject = self.tk.Frame(self.background, bg='#0e451f')
-        self.frame_subject.place(width=240, height=200, x=35, y=30)
+        frame_subject_image = self.tk.PhotoImage(file= 'classes/frame_edit.gif')
+        self.frame_subject = self.tk.Label(self.background, image=frame_subject_image)
+        self.frame_subject.place(width=250, height=200, x=35, y=30)
 
-        self.frame_edit = self.tk.Frame(self.background, bg='#0e451f')
-        self.frame_edit.place(width=250, height=200, x=300, y=30)
+        frame_edit_image = self.tk.PhotoImage(file= 'classes/frame_edit.gif')
+        self.frame_edit = self.tk.Label(self.background, image=frame_edit_image)
+        self.frame_edit.place(width=250, height=200, x=310, y=30)
 
-        self.frame_result = self.tk.Frame(self.background, bg='#0e451f')
-        self.frame_result.place(width=530, height=210, x=35, y=230)
-
-        self.progress = Progressbar(self.frame_result, 20, 160, 100)
+        frame_result_image = self.tk.PhotoImage(file= 'classes/frame_result.gif')
+        self.frame_result = self.tk.Label(self.background, image=frame_result_image)
+        self.frame_result.place(width=530, height=190, x=35, y=240)
+        
+        bar_image = self.tk.PhotoImage(file= 'classes/gradebar.gif')
+        self.bar_frame = self.tk.Label(self.frame_result, image=bar_image)
+        self.bar_frame.place(width=30, height=130, x=25, y=35)
+        self.progress = Progressbar(self.frame_result, 20, 130, 100)
         self.progress.update(0)
         
-        self.listbox = self.tk.Listbox(self.frame_subject, width=20, height = 9)
-        self.listbox.place(x=30, y=40)
+        self.listbox = self.tk.Listbox(self.frame_subject, width=18, height = 9, bg='#fcf179')
+        self.listbox.place(x=20, y=20)
         self.listbox.bind('<<ListboxSelect>>', self.onselect)
 
-        new = self.tk.Button(self.frame_subject, text='New Subject',
-                            command = self.new_subject_ui)
-        new.grid(row=0, column=0)
+        new_sbj_image = self.tk.PhotoImage(file= 'classes/new_sbj_btn.gif')
+        new = self.tk.Button(self.frame_subject, image=new_sbj_image,bg='#0e451f',relief='flat',command = self.new_subject_ui)
+        new.place(x=145, y=30)
 
-        b = self.tk.Button(self.frame_subject, text="Delete", command=self.del_sbj)
-        b.place(x=180, y=150)
-        
-        self.edit_score = self.tk.LabelFrame(self.frame_edit, text="Edit Score", padx=5, pady=5)
-        self.edit_score.place(x=30, y=30)
+        del_btn_image = self.tk.PhotoImage(file= 'classes/del_btn.gif')
+        b = self.tk.Button(self.frame_subject,image=del_btn_image, bg='#0e451f', relief='flat' , command=self.del_sbj)
+        b.place(x=145, y=120)
 
-        self.tk.Label(self.edit_score, text="Midterm :", width=10).grid(row=0, column=0)
-        self.e_s_exam_mid = self.tk.Entry(self.edit_score, width=5)
-        self.e_s_exam_mid.grid(row=0, column=1)
-        self.tk.Label(self.edit_score, text="Final :", width=10).grid(row=1, column=0)
-        self.e_s_exam_final = self.tk.Entry(self.edit_score, width=5)
-        self.e_s_exam_final.grid(row=1, column=1)
-        self.tk.Label(self.edit_score, text="Project :", width=10).grid(row=2, column=0)
-        self.e_s_project = self.tk.Entry(self.edit_score, width=5)
-        self.e_s_project.grid(row=2, column=1)
-        self.tk.Label(self.edit_score, text="Homework :", width=10).grid(row=3, column=0)
-        self.e_s_hw = self.tk.Entry(self.edit_score, width=5)
-        self.e_s_hw.grid(row=3, column=1)
-        self.tk.Label(self.edit_score, text="Other :", width=10).grid(row=4, column=0)
-        self.e_s_other = self.tk.Entry(self.edit_score, width=5)
-        self.e_s_other.grid(row=4, column=1)
+        edit_frame_image = self.tk.PhotoImage(file= 'classes/edit_frame.gif')
+        self.edit_score = self.tk.Label(self.frame_edit, bg='#0e451f',image = edit_frame_image,width=148, height=178)
+        self.edit_score.place(x=10, y=5)
+
+        self.e_s_exam_mid = self.tk.Entry(self.edit_score, width=3)
+        self.e_s_exam_mid.place(x=100,y=55)
+        self.e_s_exam_final = self.tk.Entry(self.edit_score, width=3)
+        self.e_s_exam_final.place(x=100,y=80)
+        self.e_s_project = self.tk.Entry(self.edit_score, width=3)
+        self.e_s_project.place(x=100,y=102)
+        self.e_s_hw = self.tk.Entry(self.edit_score, width=3)
+        self.e_s_hw.place(x=100,y=126)
+        self.e_s_other = self.tk.Entry(self.edit_score, width=3)
+        self.e_s_other.place(x=100,y=148)
         self.e_s_other.bind("<Return>", self.s_edit)
 
-        self.edit_btn = self.tk.Button(self.edit_score, text="Edit", command=self.s_edit)
-        self.edit_btn.grid(row=5, column=1)
+        edit_btn_image = self.tk.PhotoImage(file= 'classes/edit_btn.gif')
+        self.edit_btn = self.tk.Button(self.frame_edit,image=edit_btn_image,bg='#0e451f',relief='flat', command=self.s_edit)
+        self.edit_btn.place(x=160, y=35)
 
-        self.grade_frame = self.tk.Frame(self.frame_result, width=150, height=150, relief='raised')
-        self.tk.Label(self.grade_frame, text=' Your Grade is : ').place(x=75, y=10, width=300, anchor='n')
-        self.grade_frame.place(x=120, y=40)
+        grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
+        self.grade_frame = self.tk.Label(self.frame_result,image=grade_frame_image, width=195, height=155, bg='#0e451f')
+        self.grade_frame.place(x=100, y=15)
 
         self.hint_frame = self.tk.LabelFrame(self.frame_result, text='Hint!!!', width=200, height=190)
         self.hint_frame.place(x=320, y=15)
         self.tk.Label(self.hint_frame, text="Priority of Score is : ").place(x=100, y=10, anchor='n')
         self.root.mainloop()
+        
     def del_sbj(self):
         index = int(self.listbox.curselection()[0])
         del(self.SUBJECT_LIST[index])
@@ -201,29 +206,48 @@ class StudentUI:
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         '''
+        #grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
+        #self.grade_frame = self.tk.Label(self.frame_result,image=grade_frame_image, width=195, height=155, bg='#0e451f')
+        #self.grade_frame.place(x=100, y=15)
         i = self.lb_sel_i
         self.total_score = int(self.SUBJECT_LIST[i].s_exam_mid) + int(self.SUBJECT_LIST[i].s_final) + int(self.SUBJECT_LIST[i].s_project) \
                          + int(self.SUBJECT_LIST[i].s_hw) + int(self.SUBJECT_LIST[i].s_other)
         self.total_score = int(self.total_score)
         self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
         if self.total_score >= 80:
-            self.tk.Label(self.grade_frame, text='A', font=('times',60)).place(x=35, y=30)
+            grade_a = self.tk.PhotoImage(file= 'classes/a.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_a, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score >= 75:
-            self.tk.Label(self.grade_frame, text='B+', font=('times',60)).place(x=35, y=30)
+            grade_b_plus = self.tk.PhotoImage(file= 'classes/b+.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_b_plus, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score >= 70:
-            self.tk.Label(self.grade_frame, text='B', font=('times',60)).place(x=35, y=30)
+            grade_b = self.tk.PhotoImage(file= 'classes/b.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_b, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score >= 65:
-            self.tk.Label(self.grade_frame, text='C+', font=('times',60)).place(x=35, y=30)
+            grade_c_plus = self.tk.PhotoImage(file= 'classes/c+.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_c_plus, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score >= 60:
-            self.tk.Label(self.grade_frame, text='C', font=('times',60)).place(x=35, y=30)
+            grade_c = self.tk.PhotoImage(file= 'classes/c.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_c, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score >= 55:
-            self.tk.Label(self.grade_frame, text='D+', font=('times',60)).place(x=35, y=30)
+            grade_d_plus = self.tk.PhotoImage(file= 'classes/d+.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_d_plus, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score >= 50:
-            self.tk.Label(self.grade_frame, text='D', font=('times',60)).place(x=35, y=30)
+            grade_d = self.tk.PhotoImage(file= 'classes/d.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_d, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
         elif self.total_score < 50:
-            self.tk.Message(self.grade_frame, text='F', font=('times',60)).place(x=35, y=30)
+            grade_f = self.tk.PhotoImage(file= 'classes/f.gif')
+            self.grade_frame = self.tk.Label(self.frame_result,image=grade_f, width=195, height=155, bg='#0e451f')
+            self.grade_frame.place(x=100, y=15)
             
-        self.tk.Label(self.grade_frame, text='Total Score =  '+str(self.total_score)).place(x=25, y=120)
+        #self.tk.Label(self.grade_frame, text='Total Score =  '+str(self.total_score)).place(x=25, y=120)
 
         self.progress.update(self.total_score)
 
