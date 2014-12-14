@@ -25,10 +25,10 @@ class Run:
         tch_btn_image = self.tk.PhotoImage(file= 'Teacher.gif')
         ###############################################
 
-        self.btn_std = tk.Button(self.background, text="Student",image = std_btn_image, bg='#0e451f',relief='flat', command=self.start_std_ui)
+        self.btn_std = tk.Button(self.root, text="Student",image = std_btn_image, bg='#0e451f',relief='flat', command=self.start_std_ui)
         self.btn_std.place(x=100, y=230)
 
-        self.btn_tch = tk.Button(self.background, text="Teacher",image = tch_btn_image, bg='#0e451f',relief='flat', command=self.start_teah_ui)
+        self.btn_tch = tk.Button(self.root, text="Teacher",image = tch_btn_image, bg='#0e451f',relief='flat', command=self.start_teah_ui)
         self.btn_tch.place(x=350, y=230)
         self.root.mainloop()
     def start_std_ui(self):

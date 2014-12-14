@@ -213,40 +213,25 @@ class StudentUI:
         self.total_score = int(self.SUBJECT_LIST[i].s_exam_mid) + int(self.SUBJECT_LIST[i].s_final) + int(self.SUBJECT_LIST[i].s_project) \
                          + int(self.SUBJECT_LIST[i].s_hw) + int(self.SUBJECT_LIST[i].s_other)
         self.total_score = int(self.total_score)
-        self.tk.Label(self.grade_frame, width=150, height=130).place(x=0,y=30)
         if self.total_score >= 80:
-            grade_a = self.tk.PhotoImage(file= 'classes/a.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_a, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/a.gif')
         elif self.total_score >= 75:
-            grade_b_plus = self.tk.PhotoImage(file= 'classes/b+.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_b_plus, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/b+.gif')
         elif self.total_score >= 70:
-            grade_b = self.tk.PhotoImage(file= 'classes/b.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_b, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/b.gif')
         elif self.total_score >= 65:
-            grade_c_plus = self.tk.PhotoImage(file= 'classes/c+.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_c_plus, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/c+.gif')
         elif self.total_score >= 60:
-            grade_c = self.tk.PhotoImage(file= 'classes/c.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_c, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/c.gif')
         elif self.total_score >= 55:
-            grade_d_plus = self.tk.PhotoImage(file= 'classes/d+.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_d_plus, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/d+.gif')
         elif self.total_score >= 50:
-            grade_d = self.tk.PhotoImage(file= 'classes/d.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_d, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
+            grade_img = self.tk.PhotoImage(file= 'classes/d.gif')
         elif self.total_score < 50:
-            grade_f = self.tk.PhotoImage(file= 'classes/f.gif')
-            self.grade_frame = self.tk.Label(self.frame_result,image=grade_f, width=195, height=155, bg='#0e451f')
-            self.grade_frame.place(x=100, y=15)
-            
+            grade_img = self.tk.PhotoImage(file= 'classes/f.gif')
+
+        self.grade_frame.config(image=grade_img)
+        self.grade_frame.image = grade_img 
         #self.tk.Label(self.grade_frame, text='Total Score =  '+str(self.total_score)).place(x=25, y=120)
 
         self.progress.update(self.total_score)
