@@ -17,6 +17,8 @@ class TeacherUI(SubjectUI):
         self.check_score = []
 
     def initUI(self):
+        """       UI window       make rule - for calculate grade in base on group score mode
+        if you dont want to use make rule mode just add student and click generate"""
         self.root.geometry("600x500")
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Teacher mode')
@@ -43,12 +45,14 @@ class TeacherUI(SubjectUI):
         self.listbox.delete("anchor")
 
     def select_gen(self):
+        """       Select Generate Mode       normal mode & Group score mode """
         if self.check_mode == 0:
             self.generate_normal()
         else:
             self.gen_grade()
             
     def generate_normal(self):
+        """This Funtion for calculate grade in normal mode"""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -95,6 +99,7 @@ class TeacherUI(SubjectUI):
         grade.place(x=400, y = 40)
 
     def gen_grade(self):
+        """This Funtion for select a list of member that get grade ...."""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("400x450")
@@ -127,6 +132,7 @@ class TeacherUI(SubjectUI):
         button_F.place(x = 180, y = 340)
 
     def calculate_group(self):
+        """This Funtion for calculate score in Group score mode"""
         self.data_list.sort(reverse = True)
         num = 1
         spc = 30
@@ -170,6 +176,7 @@ class TeacherUI(SubjectUI):
          
 
     def list_a(self):
+        """        Funtion for show resault a member that get grade a"""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -186,6 +193,7 @@ class TeacherUI(SubjectUI):
             
         
     def list_bp(self):
+        """        Funtion for show resault a member that get grade b+"""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -203,6 +211,7 @@ class TeacherUI(SubjectUI):
         
         
     def list_b(self):
+        """       Funtion for show resault a member that get grade b"""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -218,6 +227,7 @@ class TeacherUI(SubjectUI):
             self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
 
     def list_cp(self):
+        """       Funtion for show resault a member that get grade c+"""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -232,6 +242,7 @@ class TeacherUI(SubjectUI):
             spc += 20
             self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
     def list_c(self):
+        """       Funtion for show resault a member that get grade c"""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -247,6 +258,7 @@ class TeacherUI(SubjectUI):
             self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
 
     def list_dp(self):
+        """       Funtion for show resault a member that get grade d+ """
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -262,6 +274,7 @@ class TeacherUI(SubjectUI):
             self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
 
     def list_d(self):
+        """       Funtion for show resault a member that get grade d """
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -276,6 +289,7 @@ class TeacherUI(SubjectUI):
             spc += 20
             self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
     def list_f(self):
+        """        Funtion for show resault a member that get grade f """
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("450x600")
@@ -291,6 +305,7 @@ class TeacherUI(SubjectUI):
             self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
             
     def make_rule(self):
+        """This Funtion for get data for calculate in Group Score mode"""
         self.new = self.tk.Toplevel()
         self.new.title("Make Rule")
         self.new.geometry("500x300")
@@ -339,6 +354,9 @@ class TeacherUI(SubjectUI):
         buttun_can = self.tk.Button(frame, text='Finish', command=self.new.destroy).grid(row=16, column =2)
 
     def add_rule(self):
+        '''
+        This Funtion for get input and save it for use
+        '''
         self.name_sub = str(self.sub.get())
         self.a_sd = float(self.sd_A.get())
         self.bp_sd = float(self.sd_Bp.get())
@@ -352,6 +370,9 @@ class TeacherUI(SubjectUI):
         self.tk.messagebox.showinfo(message="Add Completed")
         self.reset_rule("")
     def add_stu(self):
+        '''
+        This Funtion is UI of Student input
+        '''
         self.new = self.tk.Toplevel()
         self.new.title("Data new student")
         self.new.geometry("450x150")
@@ -383,6 +404,9 @@ class TeacherUI(SubjectUI):
         buttun_can = self.tk.Button(frame, text='Finish', command=self.new.destroy).grid(row=7, column=2)
 
     def reset_rule(self, text):
+        '''
+        Reset a Entrybox in rule mode
+        '''
         self.sub.delete(0, len(self.sub.get()))
         self.sub.insert(0,text)
         self.sd_A.delete(0, len(self.sd_A.get()))
@@ -400,6 +424,9 @@ class TeacherUI(SubjectUI):
         self.sd_D.delete(0, len(self.sd_D.get()))
         self.sd_D.insert(0,text)
     def reset_stu(self, text):
+        '''
+        Reset a Entrybox in student add mode
+        '''
         self.n.delete(0, len(self.n.get()))
         self.n.insert(0,text)
         self.s.delete(0, len(self.s.get()))
@@ -496,48 +523,7 @@ class TeacherUI(SubjectUI):
         self.set_e_text("")
         self.e.focus()
 
-    def result(self):
-        for i in range(len(self.data)):
-            print ("No."+ str(self.data[i][1])+" Score : "+str(self.data[i][0])),
-            if self.a != 0:
-                print ("Grade is A")
-                self.a -= 1
-            elif self.bp != 0:
-                print ("Grade is B+")
-                self.bp -= 1
-            elif self.b != 0:
-                print ("Grade is B")
-                self.b -= 1
-            elif self.cp != 0:
-                print ("Grade is C+")
-                self.cp -= 1
-            elif self.c != 0:
-                print ("Grade is C")
-                self.c -= 1
-            elif self.dp != 0:
-                print ("Grade is D+")
-                self.dp -= 1
-            elif self.d != 0:
-                print ("Grade is D")
-                self.d -= 1
-            else:
-                print ("Grade is F")
-
-    def cal_grade(self):
-        pass
-        # self.member = int(input())
-        # self.data = []
-        # self.a = int(input())
-        # self.bp = int(input())
-        # self.b = int(input())
-        # self.cp = int(input())
-        # self.c = int(input())
-        # self.dp = int(input())
-        # self.d = int(input())
-        # for i in range(self.member):
-        #     self.data.append([int(input()), i+1])
-        # self.data.sort(reverse = True)
-
+ 
     def get_subject(self):
         """ Get all subjects """
         for i in range(len(self.SUBJECT_LIST)):
