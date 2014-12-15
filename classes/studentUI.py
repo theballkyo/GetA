@@ -74,6 +74,11 @@ class StudentUI:
         self.edit_btn = self.tk.Button(self.frame_edit,image=edit_btn_image,bg='#0e451f',relief='flat', command=self.s_edit)
         self.edit_btn.place(x=160, y=35)
 
+        self.gpa_btn = self.tk.Button(self.frame_edit,text ='get GPA',command=self.get_gpa)
+        self.gpa_btn.place(x=160, y=100)
+        self.gpa_label = self.tk.Label(self.frame_edit, text='' ,width=5)
+        self.gpa_label.place(x=160,y=140)
+
         grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
         self.grade_frame = self.tk.Label(self.frame_result, image=grade_frame_image, bg='#0e451f')
         self.grade_frame.place(x=100, y=15)
@@ -100,6 +105,16 @@ class StudentUI:
         self.SUBJECT_LIST[index].s_other = self.e_s_other.get()
         self.calculate()
         self.hint()
+
+    def get_gpa(self):
+        lis_score_weight = []
+        weight_all = 0
+        for subject in self.SUBJECT_LIST:
+            print(subject.weight, subject.grade)
+            lis_score_weight.append(int(subject.weight)*subject.grade)
+            weight_all += int(subject.weight)
+        print (sum(lis_score_weight)/weight_all)
+        self.gpa_label.config(text='{:.2f}'.format(sum(lis_score_weight)/weight_all))
 
     def new_subject_ui(self):
         """ Create UI for add new subject """
@@ -206,26 +221,32 @@ class StudentUI:
         -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
         '''
-        #grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
-        #self.grade_frame = self.tk.Label(self.frame_result,image=grade_frame_image, width=195, height=155, bg='#0e451f')
-        #self.grade_frame.place(x=100, y=15)
+        grade = 0
         i = self.lb_sel_i
         self.total_score = int(self.SUBJECT_LIST[i].s_exam_mid) + int(self.SUBJECT_LIST[i].s_final) + int(self.SUBJECT_LIST[i].s_project) \
                          + int(self.SUBJECT_LIST[i].s_hw) + int(self.SUBJECT_LIST[i].s_other)
         self.total_score = int(self.total_score)
+        
         if self.total_score >= 80:
+            grade += 4.0
             grade_img = self.tk.PhotoImage(file= 'classes/a.gif')
         elif self.total_score >= 75:
+            grade += 3.5
             grade_img = self.tk.PhotoImage(file= 'classes/b+.gif')
         elif self.total_score >= 70:
+            grade += 3.0
             grade_img = self.tk.PhotoImage(file= 'classes/b.gif')
         elif self.total_score >= 65:
+            grade += 2.5
             grade_img = self.tk.PhotoImage(file= 'classes/c+.gif')
         elif self.total_score >= 60:
+            grade += 2.0
             grade_img = self.tk.PhotoImage(file= 'classes/c.gif')
         elif self.total_score >= 55:
+            grade += 1.5
             grade_img = self.tk.PhotoImage(file= 'classes/d+.gif')
         elif self.total_score >= 50:
+            grade += 1.0
             grade_img = self.tk.PhotoImage(file= 'classes/d.gif')
         elif self.total_score < 50:
             grade_img = self.tk.PhotoImage(file= 'classes/f.gif')
@@ -236,6 +257,8 @@ class StudentUI:
 
         self.progress.update(self.total_score)
 
+        self.SUBJECT_LIST[i].grade = float(grade)
+        
     def hint(self):
         '''
         x.hint()
@@ -297,10 +320,10 @@ class StudentUI:
         sbj.weight = self.weight.get()
         
 
-        self.SUBJECT_LIST.append(sbj)
         self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
         self.lb_sel_i = self.listbox.size() - 1
         print (self.lb_sel_i)
+        self.SUBJECT_LIST.append(sbj)
         self.calculate()
         self.hint()
         self.set_e_text("")
