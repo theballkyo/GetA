@@ -72,12 +72,13 @@ class StudentUI:
 
         edit_btn_image = self.tk.PhotoImage(file= 'classes/edit_btn.gif')
         self.edit_btn = self.tk.Button(self.frame_edit,image=edit_btn_image,bg='#0e451f',relief='flat', command=self.s_edit)
-        self.edit_btn.place(x=160, y=35)
+        self.edit_btn.place(x=160, y=15)
 
-        self.gpa_btn = self.tk.Button(self.frame_edit,text ='get GPA',command=self.get_gpa)
-        self.gpa_btn.place(x=160, y=100)
-        self.gpa_label = self.tk.Label(self.frame_edit, text='' ,width=5)
-        self.gpa_label.place(x=160,y=140)
+        gpa_btn_image = self.tk.PhotoImage(file= 'classes/gpa_btn.gif')
+        self.gpa_btn = self.tk.Button(self.frame_edit,image=gpa_btn_image,bg='#0e451f',relief='flat' ,command=self.get_gpa)
+        self.gpa_btn.place(x=160, y=80)
+        self.gpa_label = self.tk.Label(self.frame_edit, text='' ,width=7, height=2, bg='#ff99cc', relief='ridge')
+        self.gpa_label.place(x=173,y=147)
 
         grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
         self.grade_frame = self.tk.Label(self.frame_result, image=grade_frame_image, bg='#0e451f')
@@ -271,7 +272,7 @@ class StudentUI:
         '''
         cal_hint = []
         i = self.lb_sel_i
-        if int(self.SUBJECT_LIST[i].s_exam_mid) == 0:
+        if int(self.SUBJECT_LIST[i].s_exam_mid) == 0 :
             cal_hint.append([((int(self.SUBJECT_LIST[i].m_exam_mid) - int(self.SUBJECT_LIST[i].s_exam_mid))*(int(self.SUBJECT_LIST[i].m_exam_mid) / 100)), ("Midterm")])
         if int(self.SUBJECT_LIST[i].s_final) == 0:
             cal_hint.append([( (int(self.SUBJECT_LIST[i].m_final) - int(self.SUBJECT_LIST[i].s_final)) * (int(self.SUBJECT_LIST[i].m_final) / 100) ), ("Final")])
