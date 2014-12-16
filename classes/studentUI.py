@@ -182,10 +182,12 @@ class StudentUI:
         button_ok.place(x=258, y=170)
         buttun_clo = self.tk.Button(frame, text='Finish',fg='white',bg='#0e451f', command=self.top.destroy)
         buttun_clo.place(x=253, y= 205)
+        self.set_e_text()
         self.top.mainloop()
 
-    def set_e_text(self, text):
+    def set_e_text(self):
         """ Set Entry Text """
+        text = 0
         self.e.delete(0, len(self.e.get()))
         self.e.insert(0,text)
         self.weight.delete(0, len(self.weight.get()))
@@ -308,7 +310,7 @@ class StudentUI:
             # self.new_subject()
             self.e.focus()
             return False
-
+        
         # Add subject to listbox
         self.listbox.insert("end", self.name)
         
@@ -328,14 +330,13 @@ class StudentUI:
         sbj.m_other = self.b_other.get()
         sbj.weight = self.weight.get()
         
-
         self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
         self.lb_sel_i = self.listbox.size() - 1
         print (self.lb_sel_i)
         self.SUBJECT_LIST.append(sbj)
         self.calculate()
         self.hint()
-        self.set_e_text("")
+        self.set_e_text()
         self.get_subject()
         self.e.focus()
 

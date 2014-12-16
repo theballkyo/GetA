@@ -30,9 +30,9 @@ class Progressbar():
         elif total_score >= 55:
             color = "red"
         elif total_score >= 50:
-            color = "indian red"
-        elif total_score < 50:
             color = "brown"
+        elif total_score < 50:
+            color = "dark red"
         return color
     
     def update(self, progress):
