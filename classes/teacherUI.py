@@ -450,89 +450,8 @@ class TeacherUI():
         self.n.focus()
         self.reset_stu("")
     
-    def new_subject_ui(self):
-        """ Create UI for add new subject """
-        self.top = self.tk.Toplevel()
-        self.top.title("Add new subject")
-        self.top.geometry("250x50")
-        self.top.resizable(0, 0)
-        self.top.focus()
-
-        frame = self.tk.Frame(self.top)
-        frame.pack()
-
-        self.e = self.tk.Entry(frame)
-        self.e.grid(row=0, column=0, padx=5, pady=15)
-        self.e.focus()
-        self.e.bind("<Return>", self.add_subject)
-
-        button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
-        button_ok.grid(row=0, column=1)
-        buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
-    
-    def new_std_ui(self):
-        """ Create UI for add new subject """
-        self.top = self.tk.Toplevel()
-        self.top.title("Add new Student")
-        self.top.geometry("250x50")
-        self.top.resizable(0, 0)
-        self.top.focus()
-
-        frame = self.tk.Frame(self.top)
-        frame.pack()
-
-        self.e = self.tk.Entry(frame)
-        self.e.grid(row=0, column=0, padx=5, pady=15)
-        self.e.focus()
-        self.e.bind("<Return>", self.add_std)
-
-        button_ok = self.tk.Button(frame, text='OK', command=self.add_std)
-        button_ok.grid(row=0, column=1)
-        buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
-
     def set_e_text(self, text):
         """ Set Entry Text """
         self.e.delete(0, len(self.e.get()))
         self.e.insert(0,text)
         return True
-
-    def add_subject(self, event=""):
-        """ New subject """
-        if len(self.SUBJECT_LIST) > 20:
-            self.tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
-            self.top.destroy()
-            return False
-
-        self.name = self.e.get()
-        if self.name == "":
-            self.tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
-            # self.top.destroy()
-            # self.new_subject()
-            self.e.focus()
-            return False
-
-        # New object subject
-        self.sbj = Subject(self)
-        # sbj.teacher_initUI()
-        SubjectUI(self).teacher_initUI()
-
-        self.SUBJECT_LIST.append(self.sbj)
-        self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
-        self.set_e_text("")
-        self.get_subject()
-        self.e.focus()
-
-    def add_std(self, event=""):
-        self.name = self.e.get()
-        self.STD_LIST[self.count_id] = self.name
-        self.count_id += 1
-        self.tk.messagebox.showinfo(message="Success - " + str(self.name), title="Success")
-        self.set_e_text("")
-        self.e.focus()
-
- 
-    def get_subject(self):
-        """ Get all subjects """
-        for i in range(len(self.SUBJECT_LIST)):
-            print (i, self.SUBJECT_LIST[i].get_text())
-        print ("------------------------------------")
