@@ -2,7 +2,6 @@ from classes.studentUI import *
 from classes.teacherUI import *
 
 import tkinter as tk
-from tkinter import ttk
 class Run:
 
     def __init__(self):
@@ -11,10 +10,8 @@ class Run:
         self.initUI()
         
     def initUI(self):
-        
 
         self.mode = self.root.geometry(self.find_center(600, 500))
-        #self.mode = self.root.geometry("600x500")
         self.root.resizable(0, 0)
         self.root.title('Project PSIT "Get A"')
 
@@ -41,7 +38,6 @@ class Run:
         TeacherUI(self)
 
     def find_center(self, w, h):
-
         # get screen width and height
         ws = self.root.winfo_screenwidth()
         hs = self.root.winfo_screenheight()
@@ -51,8 +47,9 @@ class Run:
         y = (hs/2) - (h/2)
 
         return '%dx%d+%d+%d' % (w, h, x, y)
+
     def back(self):
         self.root.destroy()
         self.__init__()
-    
-r = Run()
+        
+Run()

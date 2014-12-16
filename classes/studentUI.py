@@ -103,6 +103,7 @@ class StudentUI:
         index = int(self.listbox.curselection()[0])
         del(self.SUBJECT_LIST[index])
         self.listbox.delete("anchor")
+
     def s_edit(self):
         # index = int(self.listbox.curselection()[0])
         index = self.lb_sel_i
@@ -214,13 +215,6 @@ class StudentUI:
         self.b_other.delete(0, len(self.b_other.get()))
         self.b_other.insert(0,text)
         return True
-
-    def get_subject(self):
-        """ Get all subjects """
-        for i in range(len(self.SUBJECT_LIST)):
-            print (i, self.SUBJECT_LIST[i].get_text())
-            print (i, self.SUBJECT_LIST[i].s_exam_mid)
-        print ("------------------------------------")
 
     def calculate(self):
         '''
@@ -365,4 +359,4 @@ class StudentUI:
         self.calculate()
         self.hint()
         
-        print ('You selected item %d: "%s"' % (index, value))
+        # print ('You selected item %d: "%s"' % (index, value))
