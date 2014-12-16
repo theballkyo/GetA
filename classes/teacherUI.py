@@ -28,6 +28,9 @@ class TeacherUI():
         self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=set_sd_btn, command=self.make_rule)
         self.btn_std.place(x=70, y=79)
 
+        reset_mode = self.tk.Button(self.frame_subject, bg= 'black', relief='flat', command=self.mode_reset)
+        reset_mode.place(x=70, y=200)
+
         add_std_btn = self.tk.PhotoImage(file= 'classes/tch_add_std.gif')
         self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=add_std_btn, command=self.add_stu)
         self.btn_std.place(x=330, y=77)
@@ -54,6 +57,18 @@ class TeacherUI():
         self.back_btn.place(x=70, y=493)
         self.root.mainloop()
 
+    def mode_reset(self):
+        '''reset mode'''
+        self.check_mode = 0
+        self.get_a = []
+        self.get_bp = []
+        self.get_b = []
+        self.get_cp = []
+        self.get_c = []
+        self.get_dp = []
+        self.get_d = []
+        self.get_f = []
+        
     def del_std(self):
         index = int(self.listbox.curselection()[0])
         del(self.data_list[index])
@@ -342,7 +357,6 @@ class TeacherUI():
 
         button_ok = self.tk.Button(frame, text='Add',bg='#fcfbcf', command=self.add_rule)
         button_ok.place(x=50, y=260)
-        button_ok.bind("<Return>", self.add_rule)
         button_can = self.tk.Button(frame, text='Cancle',bg='#fcfbcf', command=self.new.destroy)
         button_can.place(x=120, y=260)
 
