@@ -13,10 +13,10 @@ class StudentUI:
         self.STD_LIST = {0: "test"}
         self.initUI()
         self.lb_sel_i = -1
-        self.root.mainloop()
+        #self.root.mainloop()
         
     def initUI(self):
-        self.root.geometry("600x500")
+        self.root.geometry(self.parent.find_center(600, 500))
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Student Mode')
 
@@ -89,7 +89,7 @@ class StudentUI:
         self.hint_frame.place(x=300, y=15)
 
         back_btn = self.tk.PhotoImage(file= 'classes/std_back.gif')
-        self.back_btn = self.tk.Button(self.background,image=back_btn,bg='#0e451f',relief='flat')
+        self.back_btn = self.tk.Button(self.background,image=back_btn,bg='#0e451f',relief='flat', command=self.parent.back)
         self.back_btn.place(x=35, y=432)
         
         self.root.mainloop()

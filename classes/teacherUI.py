@@ -1,8 +1,4 @@
-from classes.subject import *
-from classes.SubjectUI import *
-from classes.student import *
-from tkinter import ttk
-class TeacherUI(SubjectUI):
+class TeacherUI():
 
     def __init__(self, parent):
         self.count_id = 0
@@ -10,17 +6,17 @@ class TeacherUI(SubjectUI):
         self.STD_LIST = {}
         self.tk = parent.tk
         self.root = parent.root
-        self.initUI()
+        self.parent = parent
         self.data_list = []
         self.data_rule = []
         self.check_mode = 0
         self.check_score = []
-        self.root.mainloop()
-
+        self.initUI()
+        
     def initUI(self):
         """       UI window       make rule - for calculate grade in base on group score mode
         if you dont want to use make rule mode just add student and click generate"""
-        self.root.geometry("500x619")
+        self.root.geometry(self.parent.find_center(500, 620))
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Teacher mode')
         
@@ -49,7 +45,7 @@ class TeacherUI(SubjectUI):
         self.btn_cal.place(x=175, y=481)
 
         back_btn = self.tk.PhotoImage(file= 'classes/tch_back.gif')
-        self.back_btn = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=back_btn)
+        self.back_btn = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=back_btn, command=self.parent.back)
         self.back_btn.place(x=70, y=493)
         self.root.mainloop()
 
