@@ -449,9 +449,3 @@ class TeacherUI():
         self.new.focus()
         self.n.focus()
         self.reset_stu("")
-    
-    def set_e_text(self, text):
-        """ Set Entry Text """
-        self.e.delete(0, len(self.e.get()))
-        self.e.insert(0,text)
-        return True
