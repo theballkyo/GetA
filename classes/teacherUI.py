@@ -15,29 +15,40 @@ class TeacherUI(SubjectUI):
         self.data_rule = []
         self.check_mode = 0
         self.check_score = []
+        self.root.mainloop()
 
     def initUI(self):
         """       UI window       make rule - for calculate grade in base on group score mode
         if you dont want to use make rule mode just add student and click generate"""
-        self.root.geometry("600x500")
+        self.root.geometry("500x619")
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Teacher mode')
         
-        self.frame_subject = self.tk.Frame(self.root, bg="White")
-        self.frame_subject.place(width=600, height=500, x=0, y=0)
+        bg_image = self.tk.PhotoImage(file= 'classes/TeacherUI.gif')
+        self.frame_subject = self.tk.Label(self.root, image=bg_image)
+        self.frame_subject.place(x=0, y=0)
 
-        self.btn_std = self.tk.Button(self.frame_subject, text="Make Rule", command=self.make_rule)
-        self.btn_std.place(x=200, y=20)
-        self.btn_std = self.tk.Button(self.frame_subject, text="New Student", command=self.add_stu)
-        self.btn_std.place(x=300, y=20)
+        set_sd_btn = self.tk.PhotoImage(file= 'classes/set_sd.gif')
+        self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=set_sd_btn, command=self.make_rule)
+        self.btn_std.place(x=70, y=79)
+
+        add_std_btn = self.tk.PhotoImage(file= 'classes/tch_add_std.gif')
+        self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=add_std_btn, command=self.add_stu)
+        self.btn_std.place(x=330, y=82)
+
+        
         self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
-        self.listbox.place(x=230, y=50)
-        self.btn_del = self.tk.Button(self.frame_subject, text="Delete", command=self.del_std)
-        self.btn_del.place(x=270, y=400)
-        self.btn_cal = self.tk.Button(self.frame_subject, text="Generate", command=self.select_gen)
-        self.btn_cal.place(x=270, y=430)
+        self.listbox.place(x=200, y=82)
 
-        self.root.mainloop
+        del_btn = self.tk.PhotoImage(file= 'classes/tch_del_btn.gif')
+        self.btn_del = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=del_btn, command=self.del_std)
+        self.btn_del.place(x=200, y=410)
+
+        gen_btn = self.tk.PhotoImage(file= 'classes/gen_btn.gif')
+        self.btn_cal = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=gen_btn, command=self.select_gen)
+        self.btn_cal.place(x=175, y=481)
+
+        self.root.mainloop()
 
     def del_std(self):
         index = int(self.listbox.curselection()[0])
