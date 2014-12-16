@@ -63,51 +63,42 @@ class TeacherUI():
             
     def generate_normal(self):
         """This Funtion for calculate grade in normal mode"""
-        self.gen = self.tk.Toplevel(bg = "Black")
+        self.gen = self.tk.Toplevel()
         self.gen.title("Result")
         self.gen.geometry("450x600")
         self.gen.resizable(0, 0)
         # self.data_list.sort(reverse = True)
+
+        score_board_bg = self.tk.PhotoImage(file='classes/score_board.gif')
+        self.sb = self.tk.Label(self.gen, image=score_board_bg)
+        self.sb.pack()
+
         num = 1
-        spc = 60
+        spc = 120
         for j in sorted(self.data_list, reverse=True):
-            self.tk.Label(self.gen, text=str(num), fg="White",bg="black").place(x=15, y = spc)
-            self.tk.Label(self.gen, text=str(j[1]), fg="White", bg="black").place(x=150, y = spc)
-            self.tk.Label(self.gen, text=str(j[0]), fg="White", bg="black").place(x=290, y = spc)
+            self.tk.Label(self.sb, text=str(num), fg="White",bg="black").place(x=60, y = spc)
+            self.tk.Label(self.sb, text=str(j[1]), fg="White", bg="black").place(x=120, y = spc)
+            self.tk.Label(self.sb, text=str(j[0]), fg="White", bg="black").place(x=290, y = spc)
 
             if j[0] >= 80:
-                self.tk.Label(self.gen, text="A", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="A", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 75:
-                self.tk.Label(self.gen, text="B+", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="B+", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 70:
-                self.tk.Label(self.gen, text="B", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="B", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 65:
-                self.tk.Label(self.gen, text="C+", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="C+", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 60:
-                self.tk.Label(self.gen, text="C", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="C", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 55:
-                self.tk.Label(self.gen, text="D+", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="D+", fg="White", bg="black").place(x=400, y = spc)
             elif j[0] >= 50:
-                self.tk.Label(self.gen, text="D", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="D", fg="White", bg="black").place(x=400, y = spc)
             else:
-                self.tk.Label(self.gen, text="F", fg="White", bg="black").place(x=400, y = spc)
+                self.tk.Label(self.sb, text="F", fg="White", bg="black").place(x=400, y = spc)
             num += 1
             spc += 20
-        score_board = self.tk.Label(self.gen, text="Score Board", fg="White",bg="black")
-        score_board.place(x=150, y=10)
-
-        sequence = self.tk.Label(self.gen, text="No.", fg="White",bg="black")
-        sequence.place(x=10,y=40)
-
-        name = self.tk.Label(self.gen, text="Name", fg="White", bg="black")
-        name.place(x=170, y = 40)
-
-        score = self.tk.Label(self.gen, text="Score", fg="White", bg="black")
-        score.place(x=300, y = 40)
-
-        grade = self.tk.Label(self.gen, text="Grade", fg="White", bg="black")
-        grade.place(x=400, y = 40)
-
+        self.gen.mainloop()
     def gen_grade(self):
         """This Funtion for select a list of member that get grade ...."""
         self.gen = self.tk.Toplevel(bg = "Black")
@@ -317,52 +308,47 @@ class TeacherUI():
     def make_rule(self):
         """This Funtion for get data for calculate in Group Score mode"""
         self.new = self.tk.Toplevel()
-        self.new.title("Make Rule")
-        self.new.geometry("500x300")
+        self.new.title("Set SD")
+        self.new.geometry("205x300")
         self.new.resizable(0, 0)
         self.new.focus()
 
-        frame = self.tk.Frame(self.new)
+        bg_make_rule = self.tk.PhotoImage(file= 'classes/make_rule.gif')
+        frame = self.tk.Label(self.new, image = bg_make_rule)
         frame.pack()
 
-        self.tk.Message(frame, text="Subject name : ", width=300).grid(row=0, column=0)
-        self.sub = self.tk.Entry(frame, width=10)
-        self.sub.grid(row=0, column=1, padx=5, pady=5)
+        self.sub = self.tk.Entry(frame, width=11)
+        self.sub.place(x=125, y=35)
         self.sub.focus()
-        self.sub.bind("<Return>", self.add_rule)
 
-        self.tk.Message(frame, text="Grade A SD:", width=100).grid(row=2, column=0)
         self.sd_A = self.tk.Entry(frame, width=5)
-        self.sd_A.grid(row=2, column=1)
+        self.sd_A.place(x=100, y=75)
 
-        self.tk.Message(frame, text="Grade B+ SD:", width=100).grid(row=4, column=0)
         self.sd_Bp = self.tk.Entry(frame, width=5)
-        self.sd_Bp.grid(row=4, column=1)
+        self.sd_Bp.place(x=100, y=100)
 
-        self.tk.Message(frame, text="Grade B SD:", width=100).grid(row=6, column=0)
         self.sd_B = self.tk.Entry(frame, width=5)
-        self.sd_B.grid(row=6, column=1)
+        self.sd_B.place(x=100, y=125)
 
-        self.tk.Message(frame, text="Grade C+ SD:", width=100).grid(row=8, column=0)
         self.sd_Cp = self.tk.Entry(frame, width=5)
-        self.sd_Cp.grid(row=8, column=1)
+        self.sd_Cp.place(x=100, y=150)
 
-        self.tk.Message(frame, text="Grade C SD:", width=100).grid(row=10, column=0)
         self.sd_C = self.tk.Entry(frame, width=5)
-        self.sd_C.grid(row=10, column=1)
+        self.sd_C.place(x=100, y=175)
 
-        self.tk.Message(frame, text="Grade D+ SD:", width=100).grid(row=12, column=0)
         self.sd_Dp = self.tk.Entry(frame, width=5)
-        self.sd_Dp.grid(row=12, column=1)
+        self.sd_Dp.place(x=100, y=200)
 
-        self.tk.Message(frame, text="Grade D SD:", width=100).grid(row=14, column=0)
         self.sd_D = self.tk.Entry(frame, width=5)
-        self.sd_D.grid(row=14, column=1)
+        self.sd_D.place(x=100, y=225)
 
-        button_ok = self.tk.Button(frame, text='Add', command=self.add_rule)
-        button_ok.grid(row=16, column=1)
-        buttun_can = self.tk.Button(frame, text='Finish', command=self.new.destroy).grid(row=16, column =2)
+        button_ok = self.tk.Button(frame, text='Add',bg='#fcfbcf', command=self.add_rule)
+        button_ok.place(x=50, y=260)
+        button_ok.bind("<Return>", self.add_rule)
+        button_can = self.tk.Button(frame, text='Finish',bg='#fcfbcf', command=self.new.destroy)
+        button_can.place(x=120, y=260)
 
+        self.new.mainloop()
     def add_rule(self):
         '''
         This Funtion for get input and save it for use
@@ -385,34 +371,32 @@ class TeacherUI():
         '''
         self.new = self.tk.Toplevel()
         self.new.title("Data new student")
-        self.new.geometry("450x150")
+        self.new.geometry("300x219")
         self.new.resizable(0, 0)
         self.new.focus()
 
-        frame = self.tk.Frame(self.new)
+        add_stu_bg = self.tk.PhotoImage(file='classes/add_stu.gif')
+        frame = self.tk.Label(self.new, image=add_stu_bg)
         frame.pack()
 
-        self.tk.Message(frame, text="Name : ", width=55).grid(row=0, column=0)
-        self.n = self.tk.Entry(frame, width=10)
-        self.n.grid(row=0, column=1, padx=5, pady=5)
+        self.n = self.tk.Entry(frame, width=20)
+        self.n.place(x=160, y=58)
         self.n.focus()
-        self.n.bind("<Return>", self.add_stu)
 
-        self.tk.Message(frame, text="Surname :", width=70).grid(row=0, column=2)
-        self.s = self.tk.Entry(frame, width=10)
-        self.s.grid(row=0, column=3, padx=5, pady=5)
+        self.s = self.tk.Entry(frame, width=20)
+        self.s.place(x=160, y=95)
 
         
-        self.tk.Message(frame, text="Score :", width=500).grid(row=2, column=0)
-        self.score = self.tk.Entry(frame, width=5)
-        self.score.grid(row=2, column=1)
+        self.score = self.tk.Entry(frame, width=8)
+        self.score.place(x=190, y=131)
       
         self.score.bind("<Return>", self.add_list)
 
-        button_ok = self.tk.Button(frame, text='Add', command=self.add_list)
-        button_ok.grid(row=7, column=1)
-        buttun_can = self.tk.Button(frame, text='Finish', command=self.new.destroy).grid(row=7, column=2)
-
+        button_ok = self.tk.Button(frame, text='Add',bg='#fcfbcf',width=8, command=self.add_list)
+        button_ok.place(x=70 ,y=175)
+        button_can = self.tk.Button(frame, text='Finish',bg='#fcfbcf',width=8, command=self.new.destroy)
+        button_can.place(x=185 ,y=175)
+        self.new.mainloop()
     def reset_rule(self, text):
         '''
         Reset a Entrybox in rule mode
