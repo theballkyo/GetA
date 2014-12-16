@@ -41,11 +41,17 @@ class StudentUI:
         self.bar_frame.place(width=30, height=130, x=25, y=35)
         self.progress = Progressbar(self.frame_result, 20, 130, 100)
         self.progress.update(0)
-        
-        self.listbox = self.tk.Listbox(self.frame_subject, width=18, height = 9, bg='#fcf179')
-        self.listbox.place(x=20, y=20)
+
+        self.lb_frame = self.tk.Frame(self.frame_subject)
+        self.lb_frame.place(x=10, y=20)
+        self.listbox = self.tk.Listbox(self.lb_frame, width=18, height = 9, bg='#fcf179')
+        self.listbox.pack(side=LEFT, fill=BOTH)
         self.listbox.bind('<<ListboxSelect>>', self.onselect)
 
+        scrollbar = self.tk.Scrollbar(self.lb_frame)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        scrollbar.config(command=self.listbox.yview)
+        
         new_sbj_image = self.tk.PhotoImage(file= 'classes/new_sbj_btn.gif')
         new = self.tk.Button(self.frame_subject, image=new_sbj_image,bg='#0e451f',relief='flat',command = self.new_subject_ui)
         new.place(x=145, y=30)
@@ -130,56 +136,53 @@ class StudentUI:
         self.top.resizable(0, 0)
         self.top.focus()
 
-        frame = self.tk.Frame(self.top)
+        add_sbj_bg = self.tk.PhotoImage(file='classes/add_sbj.gif')
+        frame = self.tk.Label(self.top, image=add_sbj_bg)
         frame.pack()
 
-        self.tk.Label(frame, text="Subject Name : ").grid(row=0, column=0)
-        self.e = self.tk.Entry(frame, width=10)
-        self.e.grid(row=0, column=1, padx=5, pady=5)
+        self.e = self.tk.Entry(frame, width=11)
+        self.e.place(x=130, y=27)
         self.e.focus()
-        self.e.bind("<Return>", self.add_subject)
         
-        self.tk.Label(frame, text="Weight :").grid(row=0, column=2)
         self.weight = self.tk.Entry(frame, width=3)
-        self.weight.grid(row=0, column=3, padx=5, pady=5)
+        self.weight.place(x=275, y=27)
 
-        self.tk.Label(frame, text="Score").grid(row=1, column=1)
-        self.tk.Label(frame, text="Max").grid(row=1, column=2)
         
-        self.tk.Label(frame, text="Midterm :").grid(row=2, column=0)
         self.s_exam_mid = self.tk.Entry(frame, width=5)
-        self.s_exam_mid.grid(row=2, column=1)
+        self.s_exam_mid.place(x=130, y=93)
         self.b_exam_mid = self.tk.Entry(frame, width=5)
-        self.b_exam_mid.grid(row=2, column=2)
+        self.b_exam_mid.place(x=202, y=93)
 
-        self.tk.Label(frame, text="Final :").grid(row=3, column=0)
+
         self.s_exam_final = self.tk.Entry(frame, width=5)
-        self.s_exam_final.grid(row=3, column=1)
+        self.s_exam_final.place(x=130, y=118)
         self.b_exam_final = self.tk.Entry(frame, width=5)
-        self.b_exam_final.grid(row=3, column=2)
+        self.b_exam_final.place(x=202, y=118)
 
-        self.tk.Label(frame, text="Project :").grid(row=4, column=0)
+
         self.s_project = self.tk.Entry(frame, width=5)
-        self.s_project.grid(row=4, column=1)
+        self.s_project.place(x=130, y=143)
         self.b_project = self.tk.Entry(frame, width=5)
-        self.b_project.grid(row=4, column=2)
+        self.b_project.place(x=202, y=143)
 
-        self.tk.Label(frame, text="Homework :").grid(row=5, column=0)
+
         self.s_hw = self.tk.Entry(frame, width=5)
-        self.s_hw.grid(row=5, column=1)
+        self.s_hw.place(x=130, y=168)
         self.b_hw = self.tk.Entry(frame, width=5)
-        self.b_hw.grid(row=5, column=2)
+        self.b_hw.place(x=202, y=168)
 
-        self.tk.Label(frame, text="Other :").grid(row=6, column=0)
+
         self.s_other = self.tk.Entry(frame, width=5)
-        self.s_other.grid(row=6, column=1)
+        self.s_other.place(x=130, y=193)
         self.b_other = self.tk.Entry(frame, width=5)
-        self.b_other.grid(row=6, column=2)
+        self.b_other.place(x=202, y=193)
         self.b_other.bind("<Return>", self.add_subject)
         
-        button_ok = self.tk.Button(frame, text='OK', command=self.add_subject)
-        button_ok.grid(row=7, column=1)
-        buttun_clo = self.tk.Button(frame, text='Close', command=self.top.destroy).grid(row=7, column=2)
+        button_ok = self.tk.Button(frame, text='Add',fg='white',bg='#0e451f', command=self.add_subject)
+        button_ok.place(x=258, y=170)
+        buttun_clo = self.tk.Button(frame, text='Finish',fg='white',bg='#0e451f', command=self.top.destroy)
+        buttun_clo.place(x=253, y= 205)
+        self.top.mainloop()
 
     def set_e_text(self, text):
         """ Set Entry Text """

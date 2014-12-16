@@ -32,9 +32,14 @@ class TeacherUI():
         self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=add_std_btn, command=self.add_stu)
         self.btn_std.place(x=330, y=77)
 
-        
-        self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
-        self.listbox.place(x=200, y=82)
+        self.lb_frame = self.tk.Frame(self.frame_subject)
+        self.lb_frame.place(x=200, y=82)
+        self.listbox = self.tk.Listbox(self.lb_frame, width = 18, height=20)
+        self.listbox.pack(side='left', fill='both')
+
+        scrollbar = self.tk.Scrollbar(self.lb_frame)
+        scrollbar.pack(side='right', fill='y')
+        scrollbar.config(command=self.listbox.yview)
 
         del_btn = self.tk.PhotoImage(file= 'classes/tch_del_btn.gif')
         self.btn_del = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=del_btn, command=self.del_std)
