@@ -30,7 +30,7 @@ class TeacherUI():
 
         add_std_btn = self.tk.PhotoImage(file= 'classes/tch_add_std.gif')
         self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=add_std_btn, command=self.add_stu)
-        self.btn_std.place(x=330, y=82)
+        self.btn_std.place(x=330, y=77)
 
         
         self.listbox = self.tk.Listbox(self.frame_subject, width = 20, height=20)
