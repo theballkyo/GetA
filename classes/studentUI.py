@@ -1,6 +1,5 @@
 from classes.subject import *
 from classes.gradebar import *
-from classes.gradebar import *
 
 class StudentUI:
 
@@ -20,23 +19,23 @@ class StudentUI:
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Student Mode')
 
-        bg_image = self.tk.PhotoImage(file= 'classes/Bg_2.gif')
+        bg_image = self.tk.PhotoImage(file= 'imgs/Bg_2.gif')
         self.background = self.tk.Label(self.root,image = bg_image)
         self.background.place(x=0, y=0)
         
-        frame_subject_image = self.tk.PhotoImage(file= 'classes/frame_edit.gif')
+        frame_subject_image = self.tk.PhotoImage(file= 'imgs/frame_edit.gif')
         self.frame_subject = self.tk.Label(self.background, image=frame_subject_image)
         self.frame_subject.place(width=250, height=200, x=35, y=30)
 
-        frame_edit_image = self.tk.PhotoImage(file= 'classes/frame_edit.gif')
+        frame_edit_image = self.tk.PhotoImage(file= 'imgs/frame_edit.gif')
         self.frame_edit = self.tk.Label(self.background, image=frame_edit_image)
         self.frame_edit.place(width=250, height=200, x=310, y=30)
 
-        frame_result_image = self.tk.PhotoImage(file= 'classes/frame_result.gif')
+        frame_result_image = self.tk.PhotoImage(file= 'imgs/frame_result.gif')
         self.frame_result = self.tk.Label(self.background, image=frame_result_image)
         self.frame_result.place(width=530, height=190, x=35, y=240)
         
-        bar_image = self.tk.PhotoImage(file= 'classes/gradebar.gif')
+        bar_image = self.tk.PhotoImage(file= 'imgs/gradebar.gif')
         self.bar_frame = self.tk.Label(self.frame_result, image=bar_image)
         self.bar_frame.place(width=30, height=130, x=25, y=35)
         self.progress = Progressbar(self.frame_result, 20, 130, 100)
@@ -52,15 +51,15 @@ class StudentUI:
         scrollbar.pack(side=RIGHT, fill=Y)
         scrollbar.config(command=self.listbox.yview)
         
-        new_sbj_image = self.tk.PhotoImage(file= 'classes/new_sbj_btn.gif')
+        new_sbj_image = self.tk.PhotoImage(file= 'imgs/new_sbj_btn.gif')
         new = self.tk.Button(self.frame_subject, image=new_sbj_image,bg='#0e451f',relief='flat',command = self.new_subject_ui)
         new.place(x=145, y=30)
 
-        del_btn_image = self.tk.PhotoImage(file= 'classes/del_btn.gif')
+        del_btn_image = self.tk.PhotoImage(file= 'imgs/del_btn.gif')
         b = self.tk.Button(self.frame_subject,image=del_btn_image, bg='#0e451f', relief='flat' , command=self.del_sbj)
         b.place(x=145, y=120)
 
-        edit_frame_image = self.tk.PhotoImage(file= 'classes/edit_frame.gif')
+        edit_frame_image = self.tk.PhotoImage(file= 'imgs/edit_frame.gif')
         self.edit_score = self.tk.Label(self.frame_edit, bg='#0e451f',image = edit_frame_image,width=148, height=178)
         self.edit_score.place(x=10, y=5)
 
@@ -76,25 +75,25 @@ class StudentUI:
         self.e_s_other.place(x=100,y=148)
         self.e_s_other.bind("<Return>", self.s_edit)
 
-        edit_btn_image = self.tk.PhotoImage(file= 'classes/edit_btn.gif')
+        edit_btn_image = self.tk.PhotoImage(file= 'imgs/edit_btn.gif')
         self.edit_btn = self.tk.Button(self.frame_edit,image=edit_btn_image,bg='#0e451f',relief='flat', command=self.s_edit)
         self.edit_btn.place(x=160, y=15)
 
-        gpa_btn_image = self.tk.PhotoImage(file= 'classes/gpa_btn.gif')
+        gpa_btn_image = self.tk.PhotoImage(file= 'imgs/gpa_btn.gif')
         self.gpa_btn = self.tk.Button(self.frame_edit,image=gpa_btn_image,bg='#0e451f',relief='flat' ,command=self.get_gpa)
         self.gpa_btn.place(x=160, y=80)
         self.gpa_label = self.tk.Label(self.frame_edit, text='' ,width=7, height=2, bg='#ff99cc', relief='ridge')
         self.gpa_label.place(x=173,y=147)
 
-        grade_frame_image = self.tk.PhotoImage(file= 'classes/grade_frame.gif')
+        grade_frame_image = self.tk.PhotoImage(file= 'imgs/grade_frame.gif')
         self.grade_frame = self.tk.Label(self.frame_result, image=grade_frame_image, bg='#0e451f')
         self.grade_frame.place(x=100, y=15)
 
-        hint_image = self.tk.PhotoImage(file= 'classes/hint.gif')
+        hint_image = self.tk.PhotoImage(file= 'imgs/hint.gif')
         self.hint_frame = self.tk.Label(self.frame_result, image=hint_image, bg='#0e451f')
         self.hint_frame.place(x=300, y=15)
 
-        back_btn = self.tk.PhotoImage(file= 'classes/std_back.gif')
+        back_btn = self.tk.PhotoImage(file= 'imgs/std_back.gif')
         self.back_btn = self.tk.Button(self.background,image=back_btn,bg='#0e451f',relief='flat', command=self.parent.back)
         self.back_btn.place(x=35, y=432)
         
@@ -125,6 +124,8 @@ class StudentUI:
             print(subject.weight, subject.grade)
             lis_score_weight.append(int(subject.weight)*subject.grade)
             weight_all += int(subject.weight)
+        if weight_all == 0:
+            weight_all = 1
         print (sum(lis_score_weight)/weight_all)
         self.gpa_label.config(text='{:.2f}'.format(sum(lis_score_weight)/weight_all))
 
@@ -136,7 +137,7 @@ class StudentUI:
         self.top.resizable(0, 0)
         self.top.focus()
 
-        add_sbj_bg = self.tk.PhotoImage(file='classes/add_sbj.gif')
+        add_sbj_bg = self.tk.PhotoImage(file='imgs/add_sbj.gif')
         frame = self.tk.Label(self.top, image=add_sbj_bg)
         frame.pack()
 
@@ -189,7 +190,7 @@ class StudentUI:
         """ Set Entry Text """
         text = 0
         self.e.delete(0, len(self.e.get()))
-        self.e.insert(0,text)
+        self.e.insert(0, "")
         self.weight.delete(0, len(self.weight.get()))
         self.weight.insert(0,text)
         self.s_exam_mid.delete(0, len(self.s_exam_mid.get()))
@@ -240,27 +241,27 @@ class StudentUI:
         
         if self.total_score >= 80:
             grade += 4.0
-            grade_img = self.tk.PhotoImage(file= 'classes/a.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/a.gif')
         elif self.total_score >= 75:
             grade += 3.5
-            grade_img = self.tk.PhotoImage(file= 'classes/b+.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/b+.gif')
         elif self.total_score >= 70:
             grade += 3.0
-            grade_img = self.tk.PhotoImage(file= 'classes/b.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/b.gif')
         elif self.total_score >= 65:
             grade += 2.5
-            grade_img = self.tk.PhotoImage(file= 'classes/c+.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/c+.gif')
         elif self.total_score >= 60:
             grade += 2.0
-            grade_img = self.tk.PhotoImage(file= 'classes/c.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/c.gif')
         elif self.total_score >= 55:
             grade += 1.5
-            grade_img = self.tk.PhotoImage(file= 'classes/d+.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/d+.gif')
         elif self.total_score >= 50:
             grade += 1.0
-            grade_img = self.tk.PhotoImage(file= 'classes/d.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/d.gif')
         elif self.total_score < 50:
-            grade_img = self.tk.PhotoImage(file= 'classes/f.gif')
+            grade_img = self.tk.PhotoImage(file= 'imgs/f.gif')
 
         self.grade_frame.config(image=grade_img)
         self.grade_frame.image = grade_img 

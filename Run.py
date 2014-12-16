@@ -1,82 +1,58 @@
+from classes.studentUI import *
+from classes.teacherUI import *
+
 import tkinter as tk
-from classes.subject import *
+from tkinter import ttk
+class Run:
 
-root = tk.Tk()
-
-# Setting windows
-root.geometry("800x600")
-root.resizable(0, 0)
-root.title('Project PSIT "Get A"')
-
-class Run(object):
-    """ Run GetA """
-    
     def __init__(self):
-        #self.s = subject.Subject(root, "Test")
-        self.SUBJECT_LIST = []
-        new_subject = tk.Button(root, text='New Subject', command = self.new_subject)
-        new_subject.pack()
+        self.root = tk.Tk()
+        self.tk = tk
+        self.initUI()
         
-    def new_subject(self):
-        """ Show new windows add new subject """
-        self.top = tk.Toplevel()
-        self.top.title("Add new subject")
-        self.top.geometry("250x50")
-        self.top.resizable(0, 0)
-        self.top.focus()
-
-        frame = tk.Frame(self.top)
-        frame.pack()
-
-        self.e = tk.Entry(frame)
-        self.e.grid(row=0, column=0, padx=5, pady=15)
-        self.e.focus()
-        self.e.bind("<Return>", self.add_subject)
+    def initUI(self):
         
-        button_ok = tk.Button(frame, text='OK', command=self.add_subject)
-        button_ok.grid(row=0, column=1)
-        buttun_clo = tk.Button(frame, text='Close', command=self.top.destroy).grid(row=0, column=2)
 
-    def set_e_text(self, text):
-        """ Set Entry Text """
-        self.e.delete(0, len(self.e.get()))
-        self.e.insert(0,text)
-        return True
+        self.mode = self.root.geometry(self.find_center(600, 500))
+        #self.mode = self.root.geometry("600x500")
+        self.root.resizable(0, 0)
+        self.root.title('Project PSIT "Get A"')
 
-    # def add_subject(self):
-    #     print (self.e.get())
-    #     self.b = tk.Button(root, text=self.e.get())
-    #     self.b.pack()
+        bg_image = self.tk.PhotoImage(file= 'imgs/Bg.gif')
+        self.background = self.tk.Label(self.root,image = bg_image)
+        self.background.place(x=0, y=0)
+        
+        title_image = self.tk.PhotoImage(file= 'imgs/Title.gif')
+        self.tk.Label(self.root,image = title_image, bg='#0e451f').place(x=100, y=30)
 
+        std_btn_image = self.tk.PhotoImage(file= 'imgs/Student.gif')
+        self.btn_std = tk.Button(self.root, text="Student",image = std_btn_image, bg='#0e451f',relief='flat', command=self.start_std_ui)
+        self.btn_std.place(x=100, y=230)
 
-    def add_subject(self, event=""):
-        """ New subject """
-        if len(self.SUBJECT_LIST) > 20:
-            tk.messagebox.showinfo(message="Subjects is maximum", title="Error !")
-            self.top.destroy()
-            return False
+        tch_btn_image = self.tk.PhotoImage(file= 'imgs/Teacher.gif')
+        self.btn_tch = tk.Button(self.root, text="Teacher",image = tch_btn_image, bg='#0e451f',relief='flat', command=self.start_teah_ui)
+        self.btn_tch.place(x=350, y=230)
+        self.root.mainloop()
+        
+    def start_std_ui(self):
+        StudentUI(self)
 
-        name = self.e.get()
-        if name == "":
-            tk.messagebox.showinfo(message="Please enter subject name.", title="Error !")
-            # self.top.destroy()
-            # self.new_subject()
-            self.e.focus()
-            return False
+    def start_teah_ui(self):
+        TeacherUI(self)
 
-        # New object subject
-        btn = Subject(tk, root, name)
-        self.SUBJECT_LIST.append(btn)
-        tk.messagebox.showinfo(message="Success - " + str(name), title="Success")
-        self.set_e_text("")
-        self.get_subject()
-        self.e.focus()
+    def find_center(self, w, h):
 
-    def get_subject(self):
-        """ Get all subjects """
-        for i in range(len(self.SUBJECT_LIST)):
-            print (i, self.SUBJECT_LIST[i].get_text())
-        print ("------------------------------------")
+        # get screen width and height
+        ws = self.root.winfo_screenwidth()
+        hs = self.root.winfo_screenheight()
 
-# Run now
+        # calculate position x, y
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+
+        return '%dx%d+%d+%d' % (w, h, x, y)
+    def back(self):
+        self.root.destroy()
+        self.__init__()
+    
 r = Run()

@@ -20,18 +20,19 @@ class TeacherUI():
         self.root.resizable(0, 0)
         self.root.title(' "Get A" : Teacher mode')
         
-        bg_image = self.tk.PhotoImage(file= 'classes/TeacherUI.gif')
+        bg_image = self.tk.PhotoImage(file= 'imgs/TeacherUI.gif')
         self.frame_subject = self.tk.Label(self.root, image=bg_image)
         self.frame_subject.place(x=0, y=0)
 
-        set_sd_btn = self.tk.PhotoImage(file= 'classes/set_sd.gif')
+        set_sd_btn = self.tk.PhotoImage(file= 'imgs/set_sd.gif')
         self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=set_sd_btn, command=self.make_rule)
         self.btn_std.place(x=70, y=79)
 
-        reset_mode = self.tk.Button(self.frame_subject, bg= 'black', relief='flat', command=self.mode_reset)
-        reset_mode.place(x=70, y=200)
+        reset_sd_btn = self.tk.PhotoImage(file= 'imgs/reset_sd.gif')
+        self.reset_btn = self.tk.Button(self.frame_subject, bg= 'white', relief='flat',image=reset_sd_btn, command=self.mode_reset)
+        self.reset_btn.place(x=78, y=155)
 
-        add_std_btn = self.tk.PhotoImage(file= 'classes/tch_add_std.gif')
+        add_std_btn = self.tk.PhotoImage(file= 'imgs/tch_add_std.gif')
         self.btn_std = self.tk.Button(self.frame_subject,bg='white', relief='flat',image=add_std_btn, command=self.add_stu)
         self.btn_std.place(x=330, y=77)
 
@@ -44,15 +45,15 @@ class TeacherUI():
         scrollbar.pack(side='right', fill='y')
         scrollbar.config(command=self.listbox.yview)
 
-        del_btn = self.tk.PhotoImage(file= 'classes/tch_del_btn.gif')
+        del_btn = self.tk.PhotoImage(file= 'imgs/tch_del_btn.gif')
         self.btn_del = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=del_btn, command=self.del_std)
         self.btn_del.place(x=200, y=410)
 
-        gen_btn = self.tk.PhotoImage(file= 'classes/gen_btn.gif')
+        gen_btn = self.tk.PhotoImage(file= 'imgs/gen_btn.gif')
         self.btn_cal = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=gen_btn, command=self.select_gen)
         self.btn_cal.place(x=175, y=481)
 
-        back_btn = self.tk.PhotoImage(file= 'classes/tch_back.gif')
+        back_btn = self.tk.PhotoImage(file= 'imgs/tch_back.gif')
         self.back_btn = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=back_btn, command=self.parent.back)
         self.back_btn.place(x=70, y=493)
         self.root.mainloop()
@@ -81,6 +82,7 @@ class TeacherUI():
         else:
             self.gen_grade()
             
+            
     def generate_normal(self):
         """This Funtion for calculate grade in normal mode"""
         self.gen = self.tk.Toplevel()
@@ -89,7 +91,7 @@ class TeacherUI():
         self.gen.resizable(0, 0)
         # self.data_list.sort(reverse = True)
 
-        score_board_bg = self.tk.PhotoImage(file='classes/score_board.gif')
+        score_board_bg = self.tk.PhotoImage(file='imgs/score_board.gif')
         self.sb = self.tk.Label(self.gen, image=score_board_bg)
         self.sb.pack()
 
@@ -119,14 +121,13 @@ class TeacherUI():
             num += 1
             spc += 20
         self.gen.mainloop()
-        
+
     def gen_grade(self):
         """This Funtion for select a list of member that get grade ...."""
         self.gen = self.tk.Toplevel(bg = "Black")
         self.gen.title("Result")
         self.gen.geometry("400x100")
         self.gen.resizable(0, 0)
-
         self.tk.Label(self.gen, text="Student's Grade of "+self.name_sub, fg="White", bg="black", font=('times',18)).pack(side='top')
         
         button_A = self.tk.Button(self.gen, text='A',width=5, bg="green", command=self.list_a)
@@ -207,7 +208,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade A",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade A",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_a:
             num += 1
             self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "   Score :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -222,7 +223,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade B+",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade B+",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_bp:
             num += 1
             self.tk.Label(self.gen, text="No."+ str(num)+"     "+i[1] + "   Score :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -237,7 +238,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade B",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade B",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_b:
             num += 1
             self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "    Score :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -252,7 +253,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade C+",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade C+",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_cp:
             num += 1
             self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -267,7 +268,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade C",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade C",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_c:
             spc += 20
             self.tk.Label(self.gen, text="No."+str(num)+"       "+i[1] + "     Score :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -282,7 +283,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade D+",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade D+",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_dp:
             num += 1
             self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -297,7 +298,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="No."+str(num)+"List name of Grade D",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade D",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_d:
             num += 1
             self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score  :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -312,7 +313,7 @@ class TeacherUI():
         spc = 30
         num = 0
         self.calculate_group()
-        self.tk.Label(self.gen, text="List name of Grade F",font=('times',18), fg="White", bg="black").pack(side='top')
+        self.tk.Label(self.gen, text="Student who get Grade F",font=('times',18), fg="White", bg="black").pack(side='top')
         for i in self.get_f:
             num += 1
             self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score  :   " +str(i[0]), fg="White", bg="black").pack(side='top')
@@ -325,7 +326,7 @@ class TeacherUI():
         self.new.resizable(0, 0)
         self.new.focus()
 
-        bg_make_rule = self.tk.PhotoImage(file= 'classes/make_rule.gif')
+        bg_make_rule = self.tk.PhotoImage(file= 'imgs/make_rule.gif')
         frame = self.tk.Label(self.new, image = bg_make_rule)
         frame.pack()
 
@@ -387,7 +388,7 @@ class TeacherUI():
         self.new.resizable(0, 0)
         self.new.focus()
 
-        add_stu_bg = self.tk.PhotoImage(file='classes/add_stu.gif')
+        add_stu_bg = self.tk.PhotoImage(file='imgs/add_stu.gif')
         frame = self.tk.Label(self.new, image=add_stu_bg)
         frame.pack()
 
