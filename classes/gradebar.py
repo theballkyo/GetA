@@ -5,8 +5,8 @@ class Progressbar():
     obj_progress = False
 
     def __init__(self, root, max_width, max_height, score):
-        bar = LabelFrame(root, text="Grade Bar", padx=5, pady=5)
-        bar.grid(row=0, column=0, padx=10, pady=10)
+        bar = Label(root)
+        bar.place(x=60,y=30)
         self.canvas = Canvas(bar, width=max_width-2, height=max_height)
         self.canvas.pack()
         self.color = self.get_color(score)
@@ -30,9 +30,9 @@ class Progressbar():
         elif total_score >= 55:
             color = "red"
         elif total_score >= 50:
-            color = "indian red"
-        elif total_score < 50:
             color = "brown"
+        elif total_score < 50:
+            color = "dark red"
         return color
     
     def update(self, progress):
@@ -42,26 +42,5 @@ class Progressbar():
         pixel_height = self.max_height - ((self.progress * self.max_height))/100.0
         if self.progress >= 0:
             self.obj_progress = self.canvas.create_rectangle(3, 3, self.max_width, pixel_height, fill='lightgrey', outline='black')
-##
-##total_score = 80
-##bar = LabelFrame(master, text="Grade Bar", padx=5, pady=5)
-##bar.pack(padx=10, pady=10)
-##if total_score >= 80:
-##    color = "green"
-##elif total_score >= 75:
-##    color = "green yellow"
-##elif total_score >= 70:
-##    color = "yellow"
-##elif total_score >= 65:
-##    color = "gold"
-##elif total_score >= 60:
-##    color = "dark orange"
-##elif total_score >= 55:
-##    color = "red"
-##elif total_score >= 50:
-##    color = "indian red"
-##elif total_score < 50:
-##    color = "brown"
-##bar = Progressbar(bar, 20, 400, color)
-##bar.update(total_score)
+
 
