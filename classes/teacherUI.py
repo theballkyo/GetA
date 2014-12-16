@@ -190,7 +190,7 @@ class TeacherUI():
         for i in self.get_a:
             spc += 20
             num += 1
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "   Score :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
             
         
     def list_bp(self):
@@ -207,7 +207,7 @@ class TeacherUI():
         for i in self.get_bp:
             spc += 20
             num += 1
-            self.tk.Label(self.gen, text="No."+ str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+ str(num)+"     "+i[1] + "   Score :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
             
         
         
@@ -225,7 +225,7 @@ class TeacherUI():
         for i in self.get_b:
             spc += 20
             num += 1
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "    Score :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
 
     def list_cp(self):
         """       Funtion for show resault a member that get grade c+"""
@@ -241,7 +241,7 @@ class TeacherUI():
         for i in self.get_cp:
             num += 1
             spc += 20
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
     def list_c(self):
         """       Funtion for show resault a member that get grade c"""
         self.gen = self.tk.Toplevel(bg = "Black")
@@ -256,7 +256,7 @@ class TeacherUI():
         for i in self.get_c:
             spc += 20
             num += 1
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"       "+i[1] + "     Score :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
 
     def list_dp(self):
         """       Funtion for show resault a member that get grade d+ """
@@ -272,7 +272,7 @@ class TeacherUI():
         for i in self.get_dp:
             num += 1
             spc += 20
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
 
     def list_d(self):
         """       Funtion for show resault a member that get grade d """
@@ -288,7 +288,7 @@ class TeacherUI():
         for i in self.get_d:
             num += 1
             spc += 20
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score  :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
     def list_f(self):
         """        Funtion for show resault a member that get grade f """
         self.gen = self.tk.Toplevel(bg = "Black")
@@ -303,7 +303,7 @@ class TeacherUI():
         for i in self.get_f:
             num += 1
             spc += 20
-            self.tk.Label(self.gen, text="No."+str(num)+" "+i[1] + " Score is " +str(i[0]), fg="White", bg="black").place(x=10, y = spc)
+            self.tk.Label(self.gen, text="No."+str(num)+"      "+i[1] + "     Score  :   " +str(i[0]), fg="White", bg="black").place(x=160, y = spc)
             
     def make_rule(self):
         """This Funtion for get data for calculate in Group Score mode"""
@@ -345,7 +345,7 @@ class TeacherUI():
         button_ok = self.tk.Button(frame, text='Add',bg='#fcfbcf', command=self.add_rule)
         button_ok.place(x=50, y=260)
         button_ok.bind("<Return>", self.add_rule)
-        button_can = self.tk.Button(frame, text='Finish',bg='#fcfbcf', command=self.new.destroy)
+        button_can = self.tk.Button(frame, text='Cancle',bg='#fcfbcf', command=self.new.destroy)
         button_can.place(x=120, y=260)
 
         self.new.mainloop()
@@ -364,7 +364,7 @@ class TeacherUI():
         self.check_mode = 1
         
         self.tk.messagebox.showinfo(message="Add Completed")
-        self.reset_rule("")
+        self.new.destroy()
     def add_stu(self):
         '''
         This Funtion is UI of Student input
@@ -430,7 +430,7 @@ class TeacherUI():
 
     def add_list(self, event=""):
         self.check_score.append(int(self.score.get()))
-        self.data_list.append([int(self.score.get()), self.n.get()+" "+self.s.get()])
+        self.data_list.append([int(self.score.get()), self.n.get()+"  "+self.s.get()])
         self.listbox.insert("end", self.n.get()+" "+self.s.get())
         self.tk.messagebox.showinfo(message="Add Completed")
         self.new.focus()
