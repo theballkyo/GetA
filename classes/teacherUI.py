@@ -48,6 +48,9 @@ class TeacherUI(SubjectUI):
         self.btn_cal = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=gen_btn, command=self.select_gen)
         self.btn_cal.place(x=175, y=481)
 
+        back_btn = self.tk.PhotoImage(file= 'classes/tch_back.gif')
+        self.back_btn = self.tk.Button(self.frame_subject, bg='white', relief='flat',image=back_btn)
+        self.back_btn.place(x=70, y=493)
         self.root.mainloop()
 
     def del_std(self):

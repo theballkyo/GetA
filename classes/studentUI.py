@@ -87,6 +87,11 @@ class StudentUI:
         hint_image = self.tk.PhotoImage(file= 'classes/hint.gif')
         self.hint_frame = self.tk.Label(self.frame_result, image=hint_image, bg='#0e451f')
         self.hint_frame.place(x=300, y=15)
+
+        back_btn = self.tk.PhotoImage(file= 'classes/std_back.gif')
+        self.back_btn = self.tk.Button(self.background,image=back_btn,bg='#0e451f',relief='flat')
+        self.back_btn.place(x=35, y=432)
+        
         self.root.mainloop()
         
     def del_sbj(self):
